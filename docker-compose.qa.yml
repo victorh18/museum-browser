@@ -5,4 +5,4 @@ services:
     image: localhost:1500/museum-library:qa
     container_name: museum-library-qa
     ports:
-      - "${PORT_QA}:80" 
+      - "5050:80" 
