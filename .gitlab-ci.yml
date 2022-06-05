@@ -1,0 +1,39 @@
+stages:
+  - test
+  - build
+  - deploy
+
+test_stage:
+  stage: test
+  image: localhost:1500/node-chrome:latest
+  before_script:
+    - export CHROME_BIN=/usr/bin/google-chrome
+    - npm ci
+
+  script:
+    - echo "Starting tests in $CI_COMMIT_BRANCH..."
+    - npm run test:ci
+    - echo "Tests ended..."
+  
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'develop' || $CI_COMMIT_BRANCH == 'qa'
+
+build_qa:
+  stage: build
+  script:
+    - echo "Starting build of $CI_COMMIT_BRANCH image"
+    - docker build -t localhost:1500/museum-library:$CI_COMMIT_SHORT_SHA
+    - docker build -t localhost:1500/museum-library:$CI_COMMIT_BRANCH
+
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'qa'
+
+deploy_qa:
+  stage: deploy
+  script:
+    - echo "Deploying app to $CI_COMMIT_BRANCH"
+    - docker push localhost:1500/museum-library:$CI_COMMIT_SHORT_SHA
+    - docker push localhost:1500/museum-library:$CI_COMMIT_BRANCH
+    - docker compose -f docker-compose.qa.yml up -d
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'qa'
