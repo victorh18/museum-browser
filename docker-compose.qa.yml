@@ -4,4 +4,4 @@ services:
   app: 
     image: localhost:1500/museum-library:qa
     ports:
-      - "5050:80"
+      - "5050:80" 
