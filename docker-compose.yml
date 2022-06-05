@@ -5,4 +5,4 @@ services:
     image: localhost:1500/museum-library:latest
     container_name: museum-library-prod
     ports:
-      - "5000:80"
+      - "${PORT_PROD}:80"
