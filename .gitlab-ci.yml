@@ -1,0 +1,16 @@
+stages:
+  - test
+  - build
+  - deploy
+
+probing_test:
+  stage: test
+  image: localhost:1500/node-chrome:latest
+  before_script:
+    - export CHROME_BIN=/usr/bin/google-chrome
+    - npm ci
+
+  script:
+    - echo "Starting tests..."
+    - npm run test:ci
+    - echo "Tests ended..."
