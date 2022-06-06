@@ -3,6 +3,7 @@ version: "3.6"
 services:
   appqa: 
     image: localhost:1500/museum-library:qa
+    restart: always
     container_name: museum-library-qa
     ports:
       - "5050:80" 
