@@ -7,6 +7,7 @@ export interface IMuseumService {
     museumProviders: IMuseumProvider[];
 
     getMuseumProvider(museumId: number): IMuseumProvider,
-    getArtworks(params: SearchParams): Artwork[];
+    getArtworks(museumId: number, params: SearchParams): Artwork[];
+    getArtwork(museumId: number, id: string): Artwork;
     getMuseumInfo(museumId: number): Museum;
 }

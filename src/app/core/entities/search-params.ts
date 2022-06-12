@@ -1,6 +1,6 @@
 export interface SearchParams {
     author: string,
-    searechText: string,
+    searchText: string,
     medium: string,
     additionalInfo: string
 }
