@@ -16,9 +16,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'museum-library'`, () => {
+  it(`should have as title 'museum-browser'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('museum-library');
+    expect(app.title).toEqual('museum-browser');
   });
 });

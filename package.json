@@ -1,5 +1,5 @@
 {
-  "name": "museum-library",
+  "name": "museum-browser",
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
