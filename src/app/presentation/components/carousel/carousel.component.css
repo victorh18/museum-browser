@@ -1,0 +1,34 @@
+.carousel {
+    width: 100%;
+    height: 55%;
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-container {
+    width: 80%;
+    background-color: #4D2214;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.current-tile {
+    display: flex;
+    width: 40%;
+    height: 95%
+}
+
+.background-tile {
+    display: flex;
+    width: 25%;
+    height: 65%;
+}
+
+.carousel-button {
+    display: flex;
+    width: 3%;
+    height: 100%;
+}

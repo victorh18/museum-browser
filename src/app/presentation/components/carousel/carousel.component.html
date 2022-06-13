@@ -1,0 +1,30 @@
+<div class="carousel">
+    <div class="carousel-container">
+      <carousel-button [icon]="'navigate_before'" class="carousel-button" (click)="movePrevious()"></carousel-button>
+  
+      <carousel-tile 
+        #previousTile
+        class="background-tile"
+        [@movePrevious]="getPreviousAnimationState(movedPrevious)"  
+        [imageUrl]="getPreviousImage(currentIndex)" 
+        (click)="movePrevious()">
+      </carousel-tile>
+  
+      <carousel-tile 
+        #currentTile
+        class="current-tile"
+        [@moveCurrent]="getCurrentAnimationState(movedNext, movedPrevious)"  
+        [imageUrl]="imageUrls[currentIndex]">
+      </carousel-tile>
+  
+      <carousel-tile 
+        #nextTile 
+        class="background-tile"
+        [@moveNext]="getNextTileAnimationState(movedNext)" 
+        [imageUrl]="getNextImage(currentIndex)" 
+        (click)="moveNext()">
+      </carousel-tile>
+  
+      <carousel-button [icon]="'navigate_next'" class="carousel-button" (click)="moveNext()"></carousel-button>
+    </div>
+  </div>
