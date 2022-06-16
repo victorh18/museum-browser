@@ -7,9 +7,9 @@ import { TRIGGERS } from './animation-helpers/animation-triggers';
     selector: 'carousel',
     templateUrl: 'carousel.component.html',
     animations: [
-        trigger('moveNext', TRIGGERS.moveNext),
-        trigger('moveCurrent', TRIGGERS.moveCurrent),
-        trigger('movePrevious', TRIGGERS.movePrevious)
+        trigger('moveNext', TRIGGERS.moveNextNew),
+        trigger('moveCurrent', TRIGGERS.moveCurrentNew),
+        trigger('movePrevious', TRIGGERS.movePreviousNew)
     ],
     styleUrls: [
         'carousel.component.css'
@@ -26,31 +26,35 @@ export class CarouselComponent {
 
     currentIndex = 1;
     
-    getNextTileAnimationState(hasMovedNext: boolean): string {
-        return hasMovedNext ? STATES.CURRENT : STATES.NEXT;
+    getNextAnimationState(hasMovedNext: boolean): string {
+        //return hasMovedNext ? STATES.CURRENT : STATES.NEXT;
+        return hasMovedNext ? STATES.OUTSIDE : STATES.NEXT
     }
 
-    getPreviousAnimationState(hasMovedPrevious: boolean): string {
-        return hasMovedPrevious ? STATES.CURRENT : STATES.PREVIOUS;
+    getPreviousAnimationState(hasMovedPrevious: boolean, hasMovedNext: boolean): string {
+        //return hasMovedPrevious ? STATES.CURRENT : STATES.PREVIOUS;
+        return hasMovedNext ? STATES.CURRENT : STATES.PREVIOUS;
     }
 
     getCurrentAnimationState(hasMovedNext: boolean, hasMovedPrevious: boolean): string {
-        return hasMovedNext ? STATES.PREVIOUS : (hasMovedPrevious ? STATES.NEXT : STATES.CURRENT)
+        //return hasMovedNext ? STATES.PREVIOUS : (hasMovedPrevious ? STATES.NEXT : STATES.CURRENT)
+        return hasMovedNext ? STATES.NEXT : STATES.CURRENT;
     }
     
     moveNext(): void {
         this.movedNext = true;
-        setTimeout(() => {
-            this.movedNext = false;
-
-            const arrayLength = this.imageUrls.length;
-            if (this.currentIndex === (arrayLength - 1)) {
-                this.currentIndex = 0
-                return;
-            }
-
+        const arrayLength = this.imageUrls.length;
+            
+        if (this.currentIndex === (arrayLength - 1)) {
+            this.currentIndex = 0
+        } else {
             this.currentIndex++;
-        }, 90);
+        }
+    }
+
+    resetAnimation(): void {
+        this.movedNext = false;
+        this.movedPrevious = false;
     }
 
     movePrevious(): void {

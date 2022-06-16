@@ -22,5 +22,12 @@ export const STYLES = {
     }),
     PREVIOUS_TO_CURRENT: style({ 
         width: '40%', 
-        transform: 'translateX(70%) translateY(0%)', })
+        transform: 'translateX(70%) translateY(0%)', }),
+    OUTSIDE_NEXT: style({
+        transform: 'translateX(70%)',
+    }),
+    NEXT_TO_CURRENT: style({
+        transform: 'translateX(70%)',
+        width: '40%'
+    })
 };

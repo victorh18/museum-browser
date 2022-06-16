@@ -8,24 +8,42 @@ export const ANIMATIONS = {
 }
 
 export const TRIGGERS = {
-    moveNext: [
-        state(STATES.NEXT, STYLES.TILE_BASE),
-        state(STATES.CURRENT, STYLES.CURRENT_TO_NEXT),
-        transition(TRANSITIONS.NEXT_TO_CURRENT, [ ANIMATIONS.NEXT_TO_CURRENT ]),
-        transition(TRANSITIONS.CURRENT_TO_NEXT, [ ]),
-    ],
-    moveCurrent: [
+    // moveNext: [
+    //     state(STATES.NEXT, STYLES.TILE_BASE),
+    //     state(STATES.CURRENT, STYLES.CURRENT_TO_NEXT),
+    //     transition(TRANSITIONS.NEXT_TO_CURRENT, [ ANIMATIONS.NEXT_TO_CURRENT ]),
+    //     transition(TRANSITIONS.CURRENT_TO_NEXT, [ ]),
+    // ],
+    // moveCurrent: [
+    //     state(STATES.CURRENT, STYLES.CURRENT_BASE),
+    //     state(STATES.PREVIOUS, STYLES.PREVIOUS_FROM_CURRENT),
+    //     state(STATES.NEXT, STYLES.NEXT_FROM_CURRENT),
+    //     transition(TRANSITIONS.CURRENT_TO_PREVIOUS, [ ANIMATIONS.NEXT_TO_CURRENT ]),
+    //     transition(TRANSITIONS.CURRENT_TO_NEXT, [ ANIMATIONS.NEXT_TO_CURRENT ]),
+    //     transition(TRANSITIONS.PREVIOUS_TO_CURRENT, [ ]),
+    // ],
+    // movePrevious: [
+    //     state(STATES.PREVIOUS, STYLES.TILE_BASE),
+    //     state(STATES.CURRENT, STYLES.PREVIOUS_TO_CURRENT),
+    //     transition(TRANSITIONS.PREVIOUS_TO_CURRENT, [ ANIMATIONS.NEXT_TO_CURRENT ]),
+    //     transition(TRANSITIONS.CURRENT_TO_PREVIOUS, [])
+    // ],
+    moveCurrentNew: [
         state(STATES.CURRENT, STYLES.CURRENT_BASE),
-        state(STATES.PREVIOUS, STYLES.PREVIOUS_FROM_CURRENT),
         state(STATES.NEXT, STYLES.NEXT_FROM_CURRENT),
-        transition(TRANSITIONS.CURRENT_TO_PREVIOUS, [ ANIMATIONS.NEXT_TO_CURRENT ]),
-        transition(TRANSITIONS.CURRENT_TO_NEXT, [ ANIMATIONS.NEXT_TO_CURRENT ]),
-        transition(TRANSITIONS.PREVIOUS_TO_CURRENT, [ ]),
+        transition(TRANSITIONS.CURRENT_TO_NEXT, [  ]),
+        transition(TRANSITIONS.NEXT_TO_CURRENT, [ ANIMATIONS. NEXT_TO_CURRENT ])
     ],
-    movePrevious: [
+    moveNextNew: [
+        state(STATES.NEXT, STYLES.TILE_BASE),
+        state(STATES.OUTSIDE, STYLES.OUTSIDE_NEXT),
+        transition(TRANSITIONS.NEXT_TO_OUTSIDE, [ ]),
+        transition(TRANSITIONS.OUTSIDE_TO_NEXT, [ ANIMATIONS.NEXT_TO_CURRENT])
+    ],
+    movePreviousNew: [
         state(STATES.PREVIOUS, STYLES.TILE_BASE),
-        state(STATES.CURRENT, STYLES.PREVIOUS_TO_CURRENT),
-        transition(TRANSITIONS.PREVIOUS_TO_CURRENT, [ ANIMATIONS.NEXT_TO_CURRENT ]),
-        transition(TRANSITIONS.CURRENT_TO_PREVIOUS, [])
-    ]
+        state(STATES.CURRENT, STYLES.NEXT_TO_CURRENT),
+        transition(TRANSITIONS.PREVIOUS_TO_CURRENT, []),
+        transition(TRANSITIONS.CURRENT_TO_PREVIOUS, [ ANIMATIONS.NEXT_TO_CURRENT])
+    ],
 }
