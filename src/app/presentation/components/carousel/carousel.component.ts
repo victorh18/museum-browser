@@ -7,9 +7,9 @@ import { TRIGGERS } from './animation-helpers/animation-triggers';
     selector: 'carousel',
     templateUrl: 'carousel.component.html',
     animations: [
-        trigger('moveNext', TRIGGERS.moveNextNew),
-        trigger('moveCurrent', TRIGGERS.moveCurrentNew),
-        trigger('movePrevious', TRIGGERS.movePreviousNew)
+        trigger('moveNext', TRIGGERS.moveNext),
+        trigger('moveCurrent', TRIGGERS.moveCurrent),
+        trigger('movePrevious', TRIGGERS.movePrevious)
     ],
     styleUrls: [
         'carousel.component.css'

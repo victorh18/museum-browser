@@ -8,7 +8,7 @@ export const ANIMATIONS = {
 }
 
 export const TRIGGERS = {
-    moveCurrentNew: [
+    moveCurrent: [
         state(STATES.CURRENT, STYLES.CURRENT_BASE),
         state(STATES.NEXT, STYLES.NEXT_FROM_CURRENT),
         state(STATES.PREVIOUS, STYLES.PREVIOUS_FROM_CURRENT),
@@ -17,7 +17,7 @@ export const TRIGGERS = {
         transition(TRANSITIONS.CURRENT_TO_PREVIOUS, []),
         transition(TRANSITIONS.PREVIOUS_TO_CURRENT, [ ANIMATIONS.NEXT_TO_CURRENT])
     ],
-    moveNextNew: [
+    moveNext: [
         state(STATES.NEXT, STYLES.TILE_BASE),
         state(STATES.OUTSIDE, STYLES.OUTSIDE_NEXT),
         state(STATES.CURRENT, STYLES.NEXT_TO_CURRENT),
@@ -25,7 +25,7 @@ export const TRIGGERS = {
         transition(TRANSITIONS.OUTSIDE_TO_NEXT, [ ANIMATIONS.NEXT_TO_CURRENT]),
         transition(TRANSITIONS.CURRENT_TO_NEXT, [ ANIMATIONS.NEXT_TO_CURRENT])
     ],
-    movePreviousNew: [
+    movePrevious: [
         state(STATES.PREVIOUS, STYLES.TILE_BASE),
         state(STATES.CURRENT, STYLES.PREVIOUS_TO_CURRENT),
         state(STATES.OUTSIDE, STYLES.OUTSIDE_PREVIOUS),
