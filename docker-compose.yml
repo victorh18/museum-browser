@@ -2,8 +2,8 @@ version: "3.6"
 
 services:
   app: 
-    image: localhost:1500/museum-library:latest
+    image: localhost:1500/museum-browser:latest
     restart: always
-    container_name: museum-library-prod
+    container_name: museum-browser-prod
     ports:
       - "5000:80"
