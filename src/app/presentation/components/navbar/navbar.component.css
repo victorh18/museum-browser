@@ -1,0 +1,9 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.menu-icon {
+  display: flex;
+  flex: 0.09;
+  justify-content: center;
+}

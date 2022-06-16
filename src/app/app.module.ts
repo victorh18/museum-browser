@@ -9,6 +9,9 @@ import { CarouselButtonComponent } from './presentation/components/carousel/caro
 import { CarouselComponent } from './presentation/components/carousel/carousel.component';
 import { HomeComponent } from './presentation/views/home/home.component';
 import { MuseumService } from './application/services/museum-service';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { NavbarComponent } from './presentation/components/navbar/navbar.component';
 // test
 @NgModule({
   declarations: [
@@ -16,12 +19,15 @@ import { MuseumService } from './application/services/museum-service';
     CarouselTileComponent,
     CarouselButtonComponent,
     CarouselComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
   ],
   providers: [ MuseumService ],
   bootstrap: [AppComponent]

@@ -6,13 +6,13 @@
 }
 
 .carousel-container {
-    width: 80%;
+    width: 86%;
     background-color: #4D2214;
     display: flex;
     justify-content: space-between;
     align-items: center;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .current-tile {
