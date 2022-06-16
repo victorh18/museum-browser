@@ -27,17 +27,14 @@ export class CarouselComponent {
     currentIndex = 1;
     
     getNextAnimationState(hasMovedNext: boolean, hasMovedPrevious: boolean): string {
-        //return hasMovedNext ? STATES.CURRENT : STATES.NEXT;
         return hasMovedNext ? STATES.OUTSIDE : hasMovedPrevious ? STATES.CURRENT : STATES.NEXT
     }
 
     getPreviousAnimationState(hasMovedNext: boolean, hasMovedPrevious: boolean): string {
-        //return hasMovedPrevious ? STATES.CURRENT : STATES.PREVIOUS;
         return hasMovedNext ? STATES.CURRENT : hasMovedPrevious ? STATES.OUTSIDE : STATES.PREVIOUS;
     }
 
     getCurrentAnimationState(hasMovedNext: boolean, hasMovedPrevious: boolean): string {
-        //return hasMovedNext ? STATES.PREVIOUS : (hasMovedPrevious ? STATES.NEXT : STATES.CURRENT)
         return hasMovedNext ? STATES.NEXT : hasMovedPrevious ? STATES.PREVIOUS : STATES.CURRENT;
     }
     
@@ -59,15 +56,13 @@ export class CarouselComponent {
 
     movePrevious(): void {
         this.movedPrevious = true;
-        setTimeout(() => {
-            this.movedPrevious = false;
-            if (this.currentIndex === 0) {
-                this.currentIndex = this.imageUrls.length - 1
-                return;
-            }
-    
-            this.currentIndex--;
-        }, 90);
+
+        if (this.currentIndex === 0) {
+            this.currentIndex = this.imageUrls.length - 1
+            return;
+        }
+
+        this.currentIndex--;
     }
 
     getPreviousImage(current: number): string {
