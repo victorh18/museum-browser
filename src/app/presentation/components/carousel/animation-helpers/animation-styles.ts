@@ -5,29 +5,28 @@ export const STYLES = {
         opacity: 1,
         width: '25%'
     }),
-    CURRENT_TO_NEXT: style({
-        transform: 'translateX(-70%) translateY(0%)',
+    NEXT_TO_CURRENT: style({
+        transform: 'translateX(-70%)',
         width: '40%'
     }),
     CURRENT_BASE: style({
         width: '40%'
     }), 
     PREVIOUS_FROM_CURRENT: style({
-        transform: 'translateX(-70%) translateY(0%)',
+        transform: 'translateX(-70%)',
         width: '25%'
     }),
     NEXT_FROM_CURRENT: style({
-        transform: 'translateX(70%) translateY(0%)', 
+        transform: 'translateX(70%)', 
         width: '25%'
     }),
     PREVIOUS_TO_CURRENT: style({ 
         width: '40%', 
-        transform: 'translateX(70%) translateY(0%)', }),
+        transform: 'translateX(70%)', }),
     OUTSIDE_NEXT: style({
-        transform: 'translateX(70%)',
+        transform: 'translateX(100%)',
     }),
-    NEXT_TO_CURRENT: style({
-        transform: 'translateX(70%)',
-        width: '40%'
+    OUTSIDE_PREVIOUS: style({
+        transform: 'translateX(-100%)'
     })
 };

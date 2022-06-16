@@ -26,19 +26,19 @@ export class CarouselComponent {
 
     currentIndex = 1;
     
-    getNextAnimationState(hasMovedNext: boolean): string {
+    getNextAnimationState(hasMovedNext: boolean, hasMovedPrevious: boolean): string {
         //return hasMovedNext ? STATES.CURRENT : STATES.NEXT;
-        return hasMovedNext ? STATES.OUTSIDE : STATES.NEXT
+        return hasMovedNext ? STATES.OUTSIDE : hasMovedPrevious ? STATES.CURRENT : STATES.NEXT
     }
 
-    getPreviousAnimationState(hasMovedPrevious: boolean, hasMovedNext: boolean): string {
+    getPreviousAnimationState(hasMovedNext: boolean, hasMovedPrevious: boolean): string {
         //return hasMovedPrevious ? STATES.CURRENT : STATES.PREVIOUS;
-        return hasMovedNext ? STATES.CURRENT : STATES.PREVIOUS;
+        return hasMovedNext ? STATES.CURRENT : hasMovedPrevious ? STATES.OUTSIDE : STATES.PREVIOUS;
     }
 
     getCurrentAnimationState(hasMovedNext: boolean, hasMovedPrevious: boolean): string {
         //return hasMovedNext ? STATES.PREVIOUS : (hasMovedPrevious ? STATES.NEXT : STATES.CURRENT)
-        return hasMovedNext ? STATES.NEXT : STATES.CURRENT;
+        return hasMovedNext ? STATES.NEXT : hasMovedPrevious ? STATES.PREVIOUS : STATES.CURRENT;
     }
     
     moveNext(): void {
