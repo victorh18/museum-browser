@@ -1,0 +1,31 @@
+<div class="carousel">
+    <div class="carousel-container mat-elevation-z8">
+      <carousel-button [icon]="'navigate_before'" class="carousel-button" (click)="movePrevious()"></carousel-button>
+
+      <carousel-tile 
+        #previousTile
+        class="background-tile"
+        [@movePrevious]="getPreviousAnimationState(movedNext, movedPrevious)"
+        [imageUrl]="getPreviousImage(currentIndex)" 
+        (click)="movePrevious()">
+      </carousel-tile>
+  
+      <carousel-tile 
+        #currentTile
+        class="current-tile"
+        [@moveCurrent]="getCurrentAnimationState(movedNext, movedPrevious)"  
+        [imageUrl]="imageUrls[currentIndex]">
+      </carousel-tile>
+  
+      <carousel-tile 
+        #nextTile 
+        class="background-tile"
+        [imageUrl]="getNextImage(currentIndex)" 
+        [@moveNext]="getNextAnimationState(movedNext, movedPrevious)"
+        (@moveNext.start)="resetAnimation()"
+        (click)="moveNext()">
+      </carousel-tile>
+  
+      <carousel-button [icon]="'navigate_next'" class="carousel-button" (click)="moveNext()"></carousel-button>
+    </div>
+  </div>
