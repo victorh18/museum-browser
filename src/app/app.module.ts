@@ -12,6 +12,7 @@ import { MuseumService } from './application/services/museum-service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from './presentation/components/navbar/navbar.component';
+import { AppFooterComponent } from './presentation/components/app-footer/app-footer.component';
 // test
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NavbarComponent } from './presentation/components/navbar/navbar.compone
     CarouselButtonComponent,
     CarouselComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    AppFooterComponent
   ],
   imports: [
     BrowserModule,
