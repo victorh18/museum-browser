@@ -13,7 +13,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from './presentation/components/navbar/navbar.component';
 import { AppFooterComponent } from './presentation/components/app-footer/app-footer.component';
+import { RijksProvider } from './application/providers/rijks-provider';
+import { IMuseumProvider, MUSEUM_PROVIDERS_TOKEN } from "./core/providers/museum-provider";
 // test
+const museumProviders = [ new RijksProvider() ]
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,11 @@ import { AppFooterComponent } from './presentation/components/app-footer/app-foo
     MatToolbarModule,
     MatButtonModule,
   ],
-  providers: [ MuseumService ],
+  providers: [ 
+    MuseumService, 
+    { provide: MUSEUM_PROVIDERS_TOKEN, useValue: museumProviders} ],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }

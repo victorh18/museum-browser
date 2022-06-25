@@ -1,3 +1,4 @@
+import { InjectionToken } from "@angular/core";
 import { Artwork } from "../entities/artwork";
 import { Museum } from "../entities/museum";
 import { SearchParams } from "../entities/search-params";
@@ -10,3 +11,5 @@ export interface IMuseumProvider {
     getArtwork(id: string): Artwork;
     paramsTransformer(params: SearchParams): string
 }
+
+export const MUSEUM_PROVIDERS_TOKEN = new InjectionToken<IMuseumProvider[]>("MuseumProviders");
