@@ -4,6 +4,7 @@
 
 .container {
   height: 88.8%;
+
 }
 
 .app-footer {
@@ -15,4 +16,5 @@
     height: 3%;
     min-height: 20px;
     background-color: #CACACA;
+    
 }

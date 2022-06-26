@@ -1,0 +1,39 @@
+<div class="painting-details-container">
+    <div class="painting-headers">
+        <p class="painting-title">{{artwork.title}}</p>
+        <p class="painting-subtitle">{{artwork.author}}</p>
+    </div>
+    <div class="painting-info-container">
+        <div class="painting-image-container"> 
+            <div>
+                <img 
+                    [src]="artwork.imageUrl" alt=""
+                    class="mat-elevation-z8"
+                    style="width: 100%; height: 100%">
+            </div>
+        </div>
+        <div class="painting-info">
+            <div class="painting-description">
+                <p class="painting-info-header">Description</p>
+                <hr>
+                <p>{{artwork.description}}</p>
+            </div>
+            <div class="painting-meta">
+                <div class="painting-materials">
+                    <p class="painting-info-header">Materials</p>
+                    <hr>
+                    <ol>
+                        <li *ngFor="let material of artwork.materials">{{material}}</li>
+                    </ol>
+                </div>
+                <div class="painting-techniques">
+                    <p class="painting-info-header">Techniques</p>
+                    <hr>
+                    <ol>
+                        <li *ngFor="let technique of artwork.techniques">{{technique}}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
