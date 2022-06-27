@@ -4,7 +4,6 @@
     width: 100%;
     height: 100%;
     align-items: center;
-    margin-top: 20px 
 }
 
 .painting-headers {
@@ -14,9 +13,10 @@
 
 .painting-title {
     font-weight: bold;
-    font-size: 2em;
+    font-size: 1.7em;
     margin-bottom: 0px;
     margin-top: 0px;
+    padding-top: 1%
 }
 
 .painting-subtitle {
