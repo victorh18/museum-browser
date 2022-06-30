@@ -7,6 +7,11 @@
 
 }
 
+.container:enter {
+  height: 92%;
+
+}
+
 .app-footer {
     display: flex;
     justify-content: center;
@@ -17,4 +22,8 @@
     min-height: 20px;
     background-color: #CACACA;
     
+}
+
+.example-class {
+  color: black;
 }
