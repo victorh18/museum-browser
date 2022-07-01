@@ -3,7 +3,8 @@ import {
     transition,
     style,
     query,
-    animate
+    animate,
+    keyframes
  } from "@angular/animations";
 
  export const fader =
@@ -11,15 +12,20 @@ import {
    transition('* <=> *', [
      query(':enter, :leave', [
        style({
+         height: '92%',
          position: 'absolute',
          left: 0,
          width: '100%',
          opacity: 0,
-         transform: 'scale(0) translateY(100%)',
+         transform: 'scale(0.3) translateY(30%)',
        }),
      ], { optional: true }),
      query(':enter', [
-       animate('2000ms ease', style({ opacity: 1, transform: 'scale(1) translateY(0)' })),
+       //animate('500ms ease', style({ opacity: 1, transform: 'scale(1) translateY(0)' })),
+       animate('500ms ease', keyframes([
+        style({ opacity: 0 }),
+        style({ opacity: 1, transform: 'scale(1) translateY(0)' })
+       ])),
      ], { optional: true })
    ]),
 ]);
