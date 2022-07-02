@@ -2,4 +2,4 @@
     <h2>Welcome to the Museum Browser</h2>
     <h3>These are the latests additions to the Rijks Museum:</h3>
 </div>
-<carousel [imageUrls]="imageUrls"></carousel>
+<carousel [images]="images" (onClickCurrent)="carouselClickCurrent($event)"></carousel>

@@ -1,0 +1,80 @@
+.painting-details-container {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.painting-headers {
+    width: 86%;
+    
+}
+
+.painting-title {
+    font-weight: bold;
+    font-size: 1.7em;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 1%
+}
+
+.painting-author {
+    font-size: 1.3em;
+    margin-top: 4px;
+
+    color: grey;
+}
+
+
+.painting-info-container {
+    display: flex;
+    height: 70%;
+    width: 86%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.painting-image-container {
+    display: flex;
+    width: 35%;
+    height: 90%;
+    justify-content: center;
+}
+
+.painting-info {
+    width: 60%;
+    height: 90%;
+    padding: 16px;
+
+}
+
+.painting-image {
+    display: flex;
+    height: 10%
+}
+
+.painting-materials {
+    width: 45%;
+}
+
+.painting-info-header {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 2px;
+    margin-bottom: 8px
+}
+
+.painting-description {
+    height: 45%;
+}
+
+.painting-meta {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.painting-techniques {
+    width: 45%;
+}

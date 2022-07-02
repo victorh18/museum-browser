@@ -1,5 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { routes } from './presentation/routing/routes';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -7,6 +9,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      imports: [
+        RouterTestingModule.withRoutes(routes)
+      ]
     }).compileComponents();
   });
 
