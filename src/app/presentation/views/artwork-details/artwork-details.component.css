@@ -19,11 +19,13 @@
     padding-top: 1%
 }
 
-.painting-subtitle {
+.painting-author {
     font-size: 1.3em;
     margin-top: 4px;
+
     color: grey;
 }
+
 
 .painting-info-container {
     display: flex;

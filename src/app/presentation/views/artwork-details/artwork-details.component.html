@@ -1,12 +1,13 @@
 <div class="painting-details-container">
     <div class="painting-headers">
-        <p class="painting-title">{{artwork.title}}</p>
-        <p class="painting-subtitle">{{artwork.author}}</p>
+        <p class="painting-title" id="artworkTitle">{{artwork.title}}</p>
+        <p class="painting-author" id="artworkAuthor">{{artwork.author}} ({{artwork.originLocation}})</p>
     </div>
     <div class="painting-info-container">
         <div class="painting-image-container"> 
             <div>
                 <img 
+                    id="artworkImage"
                     [src]="artwork.imageUrl" alt=""
                     class="mat-elevation-z8"
                     style="width: 100%; height: 100%">
@@ -16,20 +17,20 @@
             <div class="painting-description">
                 <p class="painting-info-header">Description</p>
                 <hr>
-                <p>{{artwork.description}}</p>
+                <p id="artworkDescription">{{artwork.description}}</p>
             </div>
             <div class="painting-meta">
                 <div class="painting-materials">
                     <p class="painting-info-header">Materials</p>
                     <hr>
-                    <ol>
+                    <ol id="artworkMaterialsList">
                         <li *ngFor="let material of artwork.materials">{{material}}</li>
                     </ol>
                 </div>
                 <div class="painting-techniques">
                     <p class="painting-info-header">Techniques</p>
                     <hr>
-                    <ol>
+                    <ol id="artworkTechniquesList">
                         <li *ngFor="let technique of artwork.techniques">{{technique}}</li>
                     </ol>
                 </div>
