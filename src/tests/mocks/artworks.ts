@@ -49,7 +49,7 @@ export const Artworks = [
     },
     {
         id: 5,
-        internalId: '5',
+        internalId: 'SK-C-5',
         title: 'Me and the Bois',
         description: "drippin",
         elaborationDate: new Date('2020-04-20'),
