@@ -32,7 +32,7 @@ describe('Carousel component...', () => {
     })
 
     it('...should move to the next artwork.', () => {
-        component.imageUrls = Artworks.map(a => a.imageUrl);
+        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId}));
         const initialIndex = component.currentIndex;
         
         component.moveNext();
@@ -40,7 +40,7 @@ describe('Carousel component...', () => {
         expect(component.currentIndex).toBe(initialIndex + 1);
     } );
     it('...should move to the previous artwork.', () => {
-        component.imageUrls = Artworks.map(a => a.imageUrl);
+        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId}));
         const initialIndex = component.currentIndex;
 
         component.movePrevious();
@@ -48,15 +48,15 @@ describe('Carousel component...', () => {
         expect(component.currentIndex).toBe(initialIndex - 1);
     });
     it('...should show the first image after all images have been shown.', () => {
-        component.imageUrls = Artworks.map(a => a.imageUrl);
-        component.currentIndex = component.imageUrls.length - 1;
+        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId}));
+        component.currentIndex = component.images.length - 1;
         
         component.moveNext();
 
         expect(component.currentIndex).toBe(0);
     });
     it('...should show the last image after all images have been receded.', () => {
-        component.imageUrls = Artworks.map(a => a.imageUrl);
+        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId}));
         component.currentIndex = 0;
         const lastImageIndex = Artworks.length - 1;
 

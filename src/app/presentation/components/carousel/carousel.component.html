@@ -13,8 +13,9 @@
       <carousel-tile 
         #currentTile
         class="current-tile"
+        (click)="clickOnCurrent()"
         [@moveCurrent]="getCurrentAnimationState(movedNext, movedPrevious)"  
-        [imageUrl]="imageUrls[currentIndex]">
+        [imageUrl]="images[currentIndex].imageUrl">
       </carousel-tile>
   
       <carousel-tile 

@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { STATES } from './animation-helpers/animation-constants';
 import { trigger } from '@angular/animations';
 import { TRIGGERS } from './animation-helpers/animation-triggers';
+import { Image } from '../../../core/entities/image-data';
 
 @Component({
     selector: 'carousel',
@@ -17,7 +18,8 @@ import { TRIGGERS } from './animation-helpers/animation-triggers';
 })
 
 export class CarouselComponent {
-    @Input() imageUrls: string[] = [];
+    @Input() images: Image[] = [];
+    @Output() onClickCurrent = new EventEmitter();
 
     movedNext = false;
     movedPrevious = false;
@@ -40,7 +42,7 @@ export class CarouselComponent {
     
     moveNext(): void {
         this.movedNext = true;
-        const arrayLength = this.imageUrls.length;
+        const arrayLength = this.images.length;
             
         if (this.currentIndex === (arrayLength - 1)) {
             this.currentIndex = 0
@@ -58,7 +60,7 @@ export class CarouselComponent {
         this.movedPrevious = true;
 
         if (this.currentIndex === 0) {
-            this.currentIndex = this.imageUrls.length - 1
+            this.currentIndex = this.images.length - 1
             return;
         }
 
@@ -66,12 +68,16 @@ export class CarouselComponent {
     }
 
     getPreviousImage(current: number): string {
-        const imageToReturn = current === 0 ? (this.imageUrls.length - 1) : (current - 1);
-        return this.imageUrls[imageToReturn];
+        const imageToReturn = current === 0 ? (this.images.length - 1) : (current - 1);
+        return this.images[imageToReturn].imageUrl;
     }
 
     getNextImage(current: number): string {
-        const imageToReturn = current === this.imageUrls.length - 1 ? 0 : (current + 1);
-        return this.imageUrls[imageToReturn];
+        const imageToReturn = current === this.images.length - 1 ? 0 : (current + 1);
+        return this.images[imageToReturn].imageUrl;
+    }
+
+    clickOnCurrent(): void {
+        this.onClickCurrent.emit(this.images[this.currentIndex]);
     }
 }

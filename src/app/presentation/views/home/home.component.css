@@ -1,7 +1,12 @@
 .header-container {
-    margin-left: 7%
+    margin-left: 7%;
+    padding-top: 1%;
 }
 
 .header-container h1 {
     margin-bottom: 10px;
+}
+
+.header-container h2 {
+    margin-top: 0px;
 }
