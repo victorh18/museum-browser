@@ -78,8 +78,6 @@ export class CarouselComponent {
     }
 
     clickOnCurrent(): void {
-        console.log("click on current");
-        
         this.onClickCurrent.emit(this.images[this.currentIndex]);
     }
 }
