@@ -17,8 +17,7 @@ export class AppComponent {
 
   prepareRoute(outlet: RouterOutlet) {
     const value = outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
-    console.log(value);
-    
+
     return value;
   }
 }

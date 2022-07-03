@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Artwork } from 'src/app/core/entities/artwork';
+import { IView } from 'src/app/core/entities/view';
 
 @Component({
     selector: 'artwork-details',
@@ -10,12 +11,14 @@ import { Artwork } from 'src/app/core/entities/artwork';
     ]
 })
 
-export class ArtworkDetailsComponent implements OnInit{
+export class ArtworkDetailsComponent extends IView implements OnInit {
+    public static override animationId = "ArtworkDetails";
     artwork: Artwork = <Artwork>{};
-
+    
     constructor(private activatedRoute:ActivatedRoute) {
-        
+        super();
     }
+
 
     ngOnInit() {
         this.activatedRoute.data.forEach(data => {

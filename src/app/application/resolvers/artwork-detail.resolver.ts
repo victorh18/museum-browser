@@ -15,8 +15,6 @@ export class ArtworkDetailResolver implements Resolve<Artwork> {
         const museumId = +route.params['museumId'];
         const artworkId = route.params['artworkId'];
 
-        console.log('a ver', { museumId, artworkId});
-        
         return this.museumService.getArtwork(museumId, artworkId);
     }
 }
