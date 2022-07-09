@@ -14,13 +14,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from './presentation/components/navbar/navbar.component';
 import { AppFooterComponent } from './presentation/components/app-footer/app-footer.component';
 import { RijksProvider } from './application/providers/rijks-provider';
-import { MUSEUM_PROVIDERS_TOKEN } from "./core/providers/museum-provider";
+import { MuseumProvider, MUSEUM_PROVIDERS_TOKEN } from "./core/providers/museum-provider";
 import { ArtworkDetailsComponent } from './presentation/views/artwork-details/artwork-details.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './presentation/routing/routes';
 import { ArtworkDetailResolver } from './application/resolvers/artwork-detail.resolver';
-// test
-const museumProviders = [ new RijksProvider() ]
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,12 +38,14 @@ const museumProviders = [ new RijksProvider() ]
     MatIconModule,
     MatToolbarModule,
     MatButtonModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [ 
     MuseumService, 
     ArtworkDetailResolver,
-    { provide: MUSEUM_PROVIDERS_TOKEN, useValue: museumProviders} ],
+    { provide: MuseumProvider, useClass: RijksProvider, multi: true } 
+  ],
   bootstrap: [AppComponent]
 })
 

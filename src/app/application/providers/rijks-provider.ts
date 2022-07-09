@@ -1,12 +1,13 @@
 import { Artwork } from "src/app/core/entities/artwork";
 import { Museum } from "src/app/core/entities/museum";
 import { SearchParams } from "src/app/core/entities/search-params";
-import { IMuseumProvider } from "src/app/core/providers/museum-provider";
+import { MuseumProvider } from "src/app/core/providers/museum-provider";
 
-export class RijksProvider implements IMuseumProvider {
+export class RijksProvider extends MuseumProvider {
     museum: Museum;
 
     constructor() {
+        super();
         this.museum = {
             id: 1,
             name: 'Rijks Museum',
