@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MuseumService } from 'src/app/application/services/museum-service';
 import { Image } from 'src/app/core/entities/image-data';
@@ -13,15 +13,22 @@ import { IView } from 'src/app/core/entities/view';
     ]
 })
 
-export class HomeComponent extends IView {
+export class HomeComponent extends IView implements OnInit {
     images: Image[] = [];
-    museumService: MuseumService;
     public static override animationId = "Home";
 
-    constructor(museumService: MuseumService, private router: Router) { 
+    constructor(private museumService: MuseumService, private router: Router) { 
         super();
-        this.museumService = museumService;
-        this.images = this.museumService.getArtworks(1, <SearchParams>{}).map(a => ({imageId: a.id.toString(), imageUrl: a.imageUrl}) );
+        
+    }
+    ngOnInit(): void {
+        this.museumService.getArtworks(1, <SearchParams>{}).subscribe((data) => {
+            console.log("observer data: ", data);
+            
+            this.images = data.map((a) => ({imageId: a.internalId, imageUrl: a.imageUrl }) );
+            console.log(this.images);
+            
+        })
     }
 
     carouselClickCurrent(image: Image): void {
