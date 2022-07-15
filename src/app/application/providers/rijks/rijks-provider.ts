@@ -8,7 +8,7 @@ import { Museum } from "src/app/core/entities/museum";
 import { SearchParams } from "src/app/core/entities/search-params";
 import { MuseumProvider } from "src/app/core/providers/museum-provider";
 import { ARTWORKS_ENDPOINT, RIJKS_URL } from "./constants";
-import { transformArtworkObject } from "./utils";
+import { convertParams, transformArtworkObject } from "./utils";
 
 @Injectable()
 export class RijksProvider {
@@ -25,8 +25,8 @@ export class RijksProvider {
     }
 
     getArtworks(params: SearchParams): Observable<Artwork[]> {
-        const url = `${RIJKS_URL}${ARTWORKS_ENDPOINT}?key=yluGpPtn&q=death`;
-
+        const url = `${RIJKS_URL}${ARTWORKS_ENDPOINT}?${this.paramsTransformer(params)}&key=yluGpPtn`;
+        
         return this.httpClient.get(url)
             .pipe(map((a: any) => this.transformArtworkObjects(a.artObjects)));
     }
@@ -34,19 +34,26 @@ export class RijksProvider {
         return this.museum;
     }
     getArtwork(id: string): Observable<Artwork> {
-        const url = `${RIJKS_URL}${id}?key=yluGpPtn`;
+        const url = `${RIJKS_URL}/${id}?key=yluGpPtn`;
 
         return this.httpClient.get(url)
             .pipe(map((a: any) => transformArtworkObject(a.artObject)));
     }
     paramsTransformer(params: SearchParams): string {
-        return params.searchText;
+        const paramsEquivalence: SearchParams = {
+            author: 'involvedMaker',
+            searchText: 'q',
+            medium: 'material',
+            additionalInfo: ''
+        }
+
+        return convertParams(paramsEquivalence, params);
     }
 
     private transformArtworkObjects(rawArtworks: []): Artwork[] {
         const artworks: Artwork[] = [];
 
-        rawArtworks.forEach((a: any, i) => {
+        rawArtworks.forEach((a: any) => {
             artworks.push(transformArtworkObject(a))
         })
 

@@ -22,7 +22,14 @@ export class HomeComponent extends IView implements OnInit {
         
     }
     ngOnInit(): void {
-        this.museumService.getArtworks(1, <SearchParams>{}).subscribe((data) => {
+        const params = {
+            author: 'Rembrandt+van+Rijn',
+            searchText: '',
+            medium: '',
+            additionalInfo: ''
+        };
+
+        this.museumService.getArtworks(1, params).subscribe((data) => {
             console.log("observer data: ", data);
             
             this.images = data.map((a) => ({imageId: a.internalId, imageUrl: a.imageUrl }) );
