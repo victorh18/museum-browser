@@ -22,7 +22,7 @@ export class HomeComponent extends IView implements OnInit {
         
     }
     ngOnInit(): void {
-        const params = {
+        const params: SearchParams = {
             author: 'Rembrandt+van+Rijn',
             searchText: '',
             medium: '',

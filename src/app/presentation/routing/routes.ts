@@ -4,6 +4,7 @@ import { ArtworkDetailsComponent } from '../views/artwork-details/artwork-detail
 import { HomeComponent } from '../views/home/home.component';
 
 export const routes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent, data: { animation: HomeComponent.animationId } }, 
     { path: 'artworks/:museumId/:artworkId', component: ArtworkDetailsComponent, resolve: { artwork: ArtworkDetailResolver }, data: { animation: ArtworkDetailsComponent.animationId } },
    

@@ -2,12 +2,11 @@
 
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
+import { forkJoin, map, mergeMap, Observable } from "rxjs";
 import { Artwork } from "src/app/core/entities/artwork";
 import { Museum } from "src/app/core/entities/museum";
 import { SearchParams } from "src/app/core/entities/search-params";
-import { MuseumProvider } from "src/app/core/providers/museum-provider";
-import { ARTWORKS_ENDPOINT, RIJKS_URL } from "./constants";
+import { ARTWORKS_ENDPOINT, ARTWORK_TILES, AUTH_TOKEN, RIJKS_URL } from "./constants";
 import { convertParams, transformArtworkObject } from "./utils";
 
 @Injectable()
@@ -25,12 +24,37 @@ export class RijksProvider {
     }
 
     getArtworks(params: SearchParams): Observable<Artwork[]> {
-        const url = `${RIJKS_URL}${ARTWORKS_ENDPOINT}?${this.paramsTransformer(params)}&key=yluGpPtn`;
+        const url = `${RIJKS_URL}${ARTWORKS_ENDPOINT}?${this.paramsTransformer(params)}${AUTH_TOKEN}`;
+
+        const initialArtworks$ = this.httpClient.get(url)
+            .pipe(
+                map((a: any) => this.transformArtworkObjects(a.artObjects)),
+                mergeMap(artworks => {
+                    const tilesRequests$: Observable<Artwork>[] = [];
+
+                    artworks.forEach(a => {
+                        const request$ = this.httpClient.get(`https://www.rijksmuseum.nl/api/nl/collection/${a.internalId}/tiles?key=yluGpPtn`)
+                            .pipe(
+                                map((tile: any) => {
+                                    const newImageUrl = tile.levels.filter((l: any) => l.name === 'z4')[0].tiles.filter((t: any) => t.x === 0 && t.y === 0)[0].url;
+                                    
+                                    return {
+                                        ...a,
+                                        imageUrl: newImageUrl
+                                    } as Artwork
+                                })
+                            );
+
+                        tilesRequests$.push(request$);
+                    });
+
+                    return forkJoin(tilesRequests$)
+                })
+            );
         
-        return this.httpClient.get(url)
-            .pipe(map((a: any) => this.transformArtworkObjects(a.artObjects)));
+        return initialArtworks$
     }
-    getMuseumInfo(museumId: number): Museum {
+    getMuseumInfo(): Museum {
         return this.museum;
     }
     getArtwork(id: string): Observable<Artwork> {
@@ -59,5 +83,16 @@ export class RijksProvider {
 
         return artworks;
     }
+
+    // private replaceImageUrl(artwork: Artwork): Artwork {
+    //     let tilesUrl = RIJKS_URL + ARTWORK_TILES + AUTH_TOKEN;
+    //     tilesUrl = tilesUrl.replace('objectNumber', artwork.internalId);
+
+    //     this.httpClient.get(tilesUrl).subscribe((response: any) => {
+    //         const imageUrl = response?.levels.filter((l: any) => l.name === 'z4')[0].tiles.filter((t: any) => t.x === 0 && t.y === 0)[0].url;
+    //         artwork.imageUrl = imageUrl;
+
+    //     })
+    // }
 
 }

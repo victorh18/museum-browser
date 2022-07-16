@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import { Artwork } from "src/app/core/entities/artwork"
 import { SearchParams } from "src/app/core/entities/search-params"
 
@@ -8,6 +9,7 @@ const transformArtworkObject = (rawArtwork: any): Artwork => {
         title: rawArtwork.title,
         description: rawArtwork.plaqueDescriptionEnglish ?? rawArtwork?.classification?.iconClassDescription ?? 'No description available',
         elaborationDate: new Date(),
+        presentingDate: rawArtwork?.dating?.presentingDate,
         imageUrl: rawArtwork.webImage.url,
         author: rawArtwork.principalOrFirstMaker,
         materials: rawArtwork?.materials ?? [],
