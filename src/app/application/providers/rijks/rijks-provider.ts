@@ -1,12 +1,13 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { forkJoin, map, mergeMap, Observable } from "rxjs";
 import { Artwork } from "src/app/core/entities/artwork";
 import { Museum } from "src/app/core/entities/museum";
 import { SearchParams } from "src/app/core/entities/search-params";
-import { ARTWORKS_ENDPOINT, ARTWORK_TILES, AUTH_TOKEN, RIJKS_URL } from "./constants";
+import { CustomHttpParamEncoder } from "../../utils/CustomHttpParamEncoder";
+import { ARTWORKS_ENDPOINT, AUTH_TOKEN, PARAMS_EQUIVALENCE, RIJKS_URL } from "./constants";
 import { convertParams, transformArtworkObject } from "./utils";
 
 @Injectable()
@@ -24,9 +25,15 @@ export class RijksProvider {
     }
 
     getArtworks(params: SearchParams): Observable<Artwork[]> {
-        const url = `${RIJKS_URL}${ARTWORKS_ENDPOINT}?${this.paramsTransformer(params)}${AUTH_TOKEN}`;
+        const url = RIJKS_URL;
 
-        const initialArtworks$ = this.httpClient.get(url)
+        const options = {
+            params: this.paramsTransformer(params)
+        };
+
+        console.log(options);
+        
+        const initialArtworks$ = this.httpClient.get(url, options)
             .pipe(
                 map((a: any) => this.transformArtworkObjects(a.artObjects)),
                 mergeMap(artworks => {
@@ -54,24 +61,34 @@ export class RijksProvider {
         
         return initialArtworks$
     }
+
     getMuseumInfo(): Museum {
         return this.museum;
     }
+
     getArtwork(id: string): Observable<Artwork> {
         const url = `${RIJKS_URL}/${id}?key=yluGpPtn`;
 
         return this.httpClient.get(url)
             .pipe(map((a: any) => transformArtworkObject(a.artObject)));
     }
-    paramsTransformer(params: SearchParams): string {
-        const paramsEquivalence: SearchParams = {
-            author: 'involvedMaker',
-            searchText: 'q',
-            medium: 'material',
-            additionalInfo: ''
+
+    paramsTransformer(params: SearchParams): HttpParams {
+        let httpParams = new HttpParams({ encoder: new CustomHttpParamEncoder() });
+
+        for (const key in params) {
+            if (Object.prototype.hasOwnProperty.call(params, key)) {
+                if (params[key as keyof SearchParams]) {
+                    const parameterNameKey = key as keyof SearchParams;
+                    httpParams = httpParams.set(PARAMS_EQUIVALENCE[parameterNameKey], params[parameterNameKey]);
+
+                }
+            }
         }
 
-        return convertParams(paramsEquivalence, params);
+        httpParams = httpParams.set('key', 'yluGpPtn')
+        
+        return httpParams;
     }
 
     private transformArtworkObjects(rawArtworks: []): Artwork[] {
