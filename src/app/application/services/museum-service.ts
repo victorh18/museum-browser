@@ -4,9 +4,10 @@ import { Artwork } from "src/app/core/entities/artwork";
 import { Museum } from "src/app/core/entities/museum";
 import { SearchParams } from "src/app/core/entities/search-params";
 import { MuseumProvider } from "src/app/core/providers/museum-provider";
+import { IMuseumService } from "src/app/core/services/museum-service";
 
 @Injectable()
-export class MuseumService {
+export class MuseumService implements IMuseumService{
     museumProviders: MuseumProvider[] = [];
 
     constructor(@Inject(MuseumProvider) public _museumProviders: MuseumProvider[]) {

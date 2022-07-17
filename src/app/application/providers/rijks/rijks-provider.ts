@@ -8,15 +8,17 @@ import { Museum } from "src/app/core/entities/museum";
 import { SearchParams } from "src/app/core/entities/search-params";
 import { BadRequestError } from "src/app/core/exceptions/BadRequestError";
 import { NetworkError } from "src/app/core/exceptions/NetworkError";
+import { MuseumProvider } from "src/app/core/providers/museum-provider";
 import { CustomHttpParamEncoder } from "../../utils/CustomHttpParamEncoder";
 import { PARAMS_EQUIVALENCE, RIJKS_URL } from "./constants";
 import { transformArtworkObject } from "./utils";
 
 @Injectable()
-export class RijksProvider {
+export class RijksProvider extends MuseumProvider {
     museum: Museum;
 
     constructor(private httpClient: HttpClient) {
+        super();
         this.museum = {
             id: 1,
             name: 'Rijks Museum',

@@ -4,7 +4,7 @@ import { ArtworkDetailResolver } from 'src/app/application/resolvers/artwork-det
 import { ArtworkDetailsComponent } from '../views/artwork-details/artwork-details.component';
 import { HomeComponent } from '../views/home/home.component';
 
-const routes: Routes = [
+export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent, data: { animation: HomeComponent.animationId } }, 
     { path: 'artworks/:museumId/:artworkId', component: ArtworkDetailsComponent, resolve: { artwork: ArtworkDetailResolver }, data: { animation: ArtworkDetailsComponent.animationId } },

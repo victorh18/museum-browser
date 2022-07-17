@@ -11,9 +11,10 @@ describe("Museum service...", () => {
     it('...should return a specific artwork.', () => {
         const artworkId = "SK-C-5";
         const museumId = 1;
-        const artwork = museumService.getArtwork(museumId, artworkId);
+        museumService.getArtwork(museumId, artworkId).subscribe((artwork) => {
+            expect(artwork.title).toBe("Me and the Bois");
+            expect(artwork.internalId).toBe(artworkId);
+        });
 
-        expect(artwork.title).toBe("Me and the Bois");
-        expect(artwork.internalId).toBe(artworkId);
     });
 })

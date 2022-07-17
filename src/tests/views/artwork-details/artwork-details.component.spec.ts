@@ -6,7 +6,6 @@ import { Artworks } from "src/tests/mocks/artworks";
 
 describe('Artwork details view...', () => {
     let fixture: ComponentFixture<ArtworkDetailsComponent>;
-    let component: ArtworkDetailsComponent;
     let element: HTMLElement;
     const artwork = Artworks[0];
 
@@ -26,7 +25,6 @@ describe('Artwork details view...', () => {
         })
 
         fixture = TestBed.createComponent(ArtworkDetailsComponent);
-        component = fixture.componentInstance;
         element = fixture.nativeElement;
 
     })

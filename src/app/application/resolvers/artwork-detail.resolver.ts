@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { catchError, EMPTY, Observable, of } from 'rxjs';
+import { catchError, EMPTY, Observable } from 'rxjs';
 import { Artwork } from 'src/app/core/entities/artwork';
 import { BadRequestError } from 'src/app/core/exceptions/BadRequestError';
 import { NetworkError } from 'src/app/core/exceptions/NetworkError';
