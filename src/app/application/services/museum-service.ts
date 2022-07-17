@@ -1,27 +1,27 @@
 import { Injectable, Inject } from "@angular/core";
+import { Observable } from "rxjs";
 import { Artwork } from "src/app/core/entities/artwork";
 import { Museum } from "src/app/core/entities/museum";
 import { SearchParams } from "src/app/core/entities/search-params";
-import { IMuseumProvider, MUSEUM_PROVIDERS_TOKEN } from "src/app/core/providers/museum-provider";
+import { MuseumProvider } from "src/app/core/providers/museum-provider";
 import { IMuseumService } from "src/app/core/services/museum-service";
-import { RijksProvider } from "../providers/rijks-provider";
 
 @Injectable()
-export class MuseumService implements IMuseumService {
-    museumProviders: IMuseumProvider[] = [];
+export class MuseumService implements IMuseumService{
+    museumProviders: MuseumProvider[] = [];
 
-    constructor(@Inject(MUSEUM_PROVIDERS_TOKEN) public _museumProviders: IMuseumProvider[]) {
+    constructor(@Inject(MuseumProvider) public _museumProviders: MuseumProvider[]) {
         this.museumProviders = _museumProviders;
     }
-    getArtwork(museumId: number, id: string): Artwork {
+    getArtwork(museumId: number, id: string): Observable<Artwork> {
         return this.getMuseumProvider(museumId).getArtwork(id);
     }
 
-    getMuseumProvider(museumId: number): IMuseumProvider {
+    getMuseumProvider(museumId: number): MuseumProvider {
         return this.museumProviders.filter(mp => mp.museum.id === museumId)[0];
 
     }
-    getArtworks(museumId: number, params: SearchParams): Artwork[] {
+    getArtworks(museumId: number, params: SearchParams): Observable<Artwork[]> {
         return this.getMuseumProvider(museumId).getArtworks(params);
     }
     getMuseumInfo(museumId: number): Museum {

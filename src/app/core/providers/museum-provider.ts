@@ -1,15 +1,17 @@
+import { HttpParams } from "@angular/common/http";
 import { InjectionToken } from "@angular/core";
+import { Observable } from "rxjs";
 import { Artwork } from "../entities/artwork";
 import { Museum } from "../entities/museum";
 import { SearchParams } from "../entities/search-params";
 
-export interface IMuseumProvider {
-    museum: Museum,
+export abstract class MuseumProvider {
+    abstract museum: Museum;
 
-    getArtworks(params: SearchParams): Artwork[];
-    getMuseumInfo(museumId: number): Museum;
-    getArtwork(id: string): Artwork;
-    paramsTransformer(params: SearchParams): string
+    abstract getArtworks(params: SearchParams): Observable<Artwork[]>;
+    abstract getMuseumInfo(museumId: number): Museum;
+    abstract getArtwork(id: string): Observable<Artwork>;
+    abstract paramsTransformer(params: SearchParams): HttpParams;
 }
 
-export const MUSEUM_PROVIDERS_TOKEN = new InjectionToken<IMuseumProvider[]>("MuseumProviders");
+export const MUSEUM_PROVIDERS_TOKEN = new InjectionToken<MuseumProvider[]>("MuseumProviders");

@@ -69,12 +69,12 @@ export class CarouselComponent {
 
     getPreviousImage(current: number): string {
         const imageToReturn = current === 0 ? (this.images.length - 1) : (current - 1);
-        return this.images[imageToReturn].imageUrl;
+        return this.images[imageToReturn]?.imageUrl ?? '';
     }
 
     getNextImage(current: number): string {
         const imageToReturn = current === this.images.length - 1 ? 0 : (current + 1);
-        return this.images[imageToReturn].imageUrl;
+        return this.images[imageToReturn]?.imageUrl ?? '';
     }
 
     clickOnCurrent(): void {

@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MuseumService } from 'src/app/application/services/museum-service';
 import { Image } from 'src/app/core/entities/image-data';
 import { SearchParams } from 'src/app/core/entities/search-params';
 import { IView } from 'src/app/core/entities/view';
+import { BadRequestError } from 'src/app/core/exceptions/BadRequestError';
+import { NetworkError } from 'src/app/core/exceptions/NetworkError';
 
 @Component({
     selector: 'home',
@@ -13,20 +15,50 @@ import { IView } from 'src/app/core/entities/view';
     ]
 })
 
-export class HomeComponent extends IView {
+export class HomeComponent extends IView implements OnInit {
     images: Image[] = [];
-    museumService: MuseumService;
+    isRedirecting = false;
+
     public static override animationId = "Home";
 
-    constructor(museumService: MuseumService, private router: Router) { 
+    constructor(private museumService: MuseumService, private router: Router) { 
         super();
-        this.museumService = museumService;
-        this.images = this.museumService.getArtworks(1, <SearchParams>{}).map(a => ({imageId: a.id.toString(), imageUrl: a.imageUrl}) );
+        
+    }
+    ngOnInit(): void {
+        const params: SearchParams = {
+            author: 'Rembrandt+van+Rijn',
+            searchText: '',
+            medium: '',
+            additionalInfo: ''
+        };
+
+        this.museumService.getArtworks(1, params).subscribe({
+            next: (data) => {
+                this.images = data.map((a) => ({imageId: a.internalId, imageUrl: a.imageUrl }) );
+            },
+            error: this.handleError
+        })
+        
     }
 
     carouselClickCurrent(image: Image): void {
+        this.isRedirecting = true;
         this.router.navigate([`artworks/1/${image.imageId}`]);
     }
 
+    handleError(err: any) {
+        const errorType = err.name;
 
+        const errorHandling = {
+            [BadRequestError.name]: (err: BadRequestError) => {
+                console.log('Something bad happened with the request.', { ...err });
+            },
+            [NetworkError.name]: (err: NetworkError) => {
+                console.log('Something bad happened with the network.', { ...err });
+            }
+        }
+        
+        errorHandling[errorType](err);
+    }
 }

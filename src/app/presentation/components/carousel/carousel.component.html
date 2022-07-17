@@ -10,12 +10,14 @@
         (click)="movePrevious()">
       </carousel-tile>
   
-      <carousel-tile 
+      <mat-spinner *ngIf="images.length === 0"></mat-spinner>
+      <carousel-tile *ngIf="images.length > 0"
         #currentTile
         class="current-tile"
         (click)="clickOnCurrent()"
         [@moveCurrent]="getCurrentAnimationState(movedNext, movedPrevious)"  
-        [imageUrl]="images[currentIndex].imageUrl">
+        [imageUrl]="images[currentIndex]?.imageUrl ?? ''">     
+
       </carousel-tile>
   
       <carousel-tile 
