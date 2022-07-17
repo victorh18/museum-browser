@@ -1,10 +1,11 @@
+import { HttpParams } from "@angular/common/http";
+import { Observable, of } from "rxjs";
 import { Artwork } from "src/app/core/entities/artwork";
 import { Museum } from "src/app/core/entities/museum";
 import { SearchParams } from "src/app/core/entities/search-params";
-import { IMuseumProvider } from "src/app/core/providers/museum-provider";
 import { Artworks } from "./artworks";
 
-export class ProviderMock implements IMuseumProvider {
+export class ProviderMock {
     museum: Museum;
 
     constructor() {
@@ -15,17 +16,18 @@ export class ProviderMock implements IMuseumProvider {
             description: 'A cool museum'
         }
     }
-    getArtworks(params: SearchParams): Artwork[] {
-        return Artworks;
+    getArtworks(params: SearchParams): Observable<Artwork[]> {
+        return of(Artworks);
     }
     getMuseumInfo(museumId: number): Museum {
         return this.museum;
     }
-    getArtwork(id: string): Artwork {
-        return this.getArtworks(<SearchParams>{}).filter(a => a.id === +id || a.internalId === id)[0];
+    getArtwork(id: string): Observable<Artwork> {
+        const artwork = Artworks.filter(a => a.internalId === id)[0]
+        return of(artwork);
     }
-    paramsTransformer(params: SearchParams): string {
-        return params.searchText;
+    paramsTransformer(params: SearchParams): HttpParams {
+        return new HttpParams();
     }
 
 }

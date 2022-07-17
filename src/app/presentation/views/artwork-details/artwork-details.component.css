@@ -22,7 +22,15 @@
 .painting-author {
     font-size: 1.3em;
     margin-top: 4px;
+    margin-bottom: 0px;
 
+    color: grey;
+}
+
+.painting-date {
+    font-size: 0.9em;
+    margin-bottom: 4px;
+    margin-top: 0px;
     color: grey;
 }
 

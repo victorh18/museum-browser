@@ -2,4 +2,9 @@
     <h2>Welcome to the Museum Browser</h2>
     <h3>These are the latests additions to the Rijks Museum:</h3>
 </div>
+
 <carousel [images]="images" (onClickCurrent)="carouselClickCurrent($event)"></carousel>
+
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 12px;">
+    <mat-spinner [diameter]="50" *ngIf="isRedirecting" ></mat-spinner>
+</div>
