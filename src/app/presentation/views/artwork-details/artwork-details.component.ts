@@ -13,6 +13,7 @@ import { IView } from 'src/app/core/entities/view';
 
 export class ArtworkDetailsComponent extends IView implements OnInit {
     public static override animationId = "ArtworkDetails";
+    imageLoaded = false;
     artwork: Artwork = <Artwork>{};
     
     constructor(private activatedRoute:ActivatedRoute) {
@@ -24,5 +25,9 @@ export class ArtworkDetailsComponent extends IView implements OnInit {
         this.activatedRoute.data.forEach(data => {
             this.artwork = data['artwork'];
         })
+    }
+
+    onImageLoad() {
+        this.imageLoaded = true;
     }
 }

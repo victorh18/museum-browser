@@ -13,14 +13,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from './presentation/components/navbar/navbar.component';
 import { AppFooterComponent } from './presentation/components/app-footer/app-footer.component';
-import { RijksProvider } from './application/providers/rijks-provider';
-import { MUSEUM_PROVIDERS_TOKEN } from "./core/providers/museum-provider";
+import { RijksProvider } from './application/providers/rijks/rijks-provider';
+import { MuseumProvider } from "./core/providers/museum-provider";
 import { ArtworkDetailsComponent } from './presentation/views/artwork-details/artwork-details.component';
-import { RouterModule } from '@angular/router';
-import { routes } from './presentation/routing/routes';
+import { AppRoutingModule } from './presentation/routing/routes';
 import { ArtworkDetailResolver } from './application/resolvers/artwork-detail.resolver';
-// test
-const museumProviders = [ new RijksProvider() ]
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RijksInterceptor } from './application/providers/rijks/interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,13 +38,17 @@ const museumProviders = [ new RijksProvider() ]
     BrowserAnimationsModule,
     MatIconModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
     MatButtonModule,
-    RouterModule.forRoot(routes)
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [ 
     MuseumService, 
     ArtworkDetailResolver,
-    { provide: MUSEUM_PROVIDERS_TOKEN, useValue: museumProviders} ],
+    { provide: MuseumProvider, useClass: RijksProvider, multi: true } ,
+    { provide: HTTP_INTERCEPTORS, useClass: RijksInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 

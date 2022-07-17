@@ -4,6 +4,7 @@ export interface Artwork {
     title: string,
     description: string
     elaborationDate: Date,
+    presentingDate: string,
     imageUrl: string,
     author: string,
     materials: string[],

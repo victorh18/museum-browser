@@ -1,16 +1,19 @@
 <div class="painting-details-container">
     <div class="painting-headers">
         <p class="painting-title" id="artworkTitle">{{artwork.title}}</p>
-        <p class="painting-author" id="artworkAuthor">{{artwork.author}} ({{artwork.originLocation}})</p>
+        <p class="painting-author" id="artworkAuthor">{{artwork.author}}</p>
+        <p class="painting-date" id="artworkDate">{{artwork.presentingDate}}</p>
     </div>
     <div class="painting-info-container">
         <div class="painting-image-container"> 
             <div>
-                <img 
+                <mat-spinner *ngIf="!imageLoaded"></mat-spinner>
+                <img [hidden]="!imageLoaded"
                     id="artworkImage"
+                    (load)="onImageLoad()"
                     [src]="artwork.imageUrl" alt=""
                     class="mat-elevation-z8"
-                    style="width: 100%; height: 100%">
+                    style="max-width: 100%; max-height: 100%">
             </div>
         </div>
         <div class="painting-info">
@@ -30,9 +33,10 @@
                 <div class="painting-techniques">
                     <p class="painting-info-header">Techniques</p>
                     <hr>
-                    <ol id="artworkTechniquesList">
+                    <ol id="artworkTechniquesList" *ngIf="artwork.techniques.length > 0">
                         <li *ngFor="let technique of artwork.techniques">{{technique}}</li>
                     </ol>
+                    <p *ngIf="artwork.techniques.length === 0">Information about techniques not available</p>
                 </div>
             </div>
         </div>
