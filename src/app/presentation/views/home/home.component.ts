@@ -4,6 +4,8 @@ import { MuseumService } from 'src/app/application/services/museum-service';
 import { Image } from 'src/app/core/entities/image-data';
 import { SearchParams } from 'src/app/core/entities/search-params';
 import { IView } from 'src/app/core/entities/view';
+import { BadRequestError } from 'src/app/core/exceptions/BadRequestError';
+import { NetworkError } from 'src/app/core/exceptions/NetworkError';
 
 @Component({
     selector: 'home',
@@ -29,18 +31,31 @@ export class HomeComponent extends IView implements OnInit {
             additionalInfo: ''
         };
 
-        this.museumService.getArtworks(1, params).subscribe((data) => {
-            console.log("observer data: ", data);
-            
-            this.images = data.map((a) => ({imageId: a.internalId, imageUrl: a.imageUrl }) );
-            console.log(this.images);
-            
+        this.museumService.getArtworks(1, params).subscribe({
+            next: (data) => {
+                this.images = data.map((a) => ({imageId: a.internalId, imageUrl: a.imageUrl }) );
+            },
+            error: this.handleError
         })
+        
     }
 
     carouselClickCurrent(image: Image): void {
         this.router.navigate([`artworks/1/${image.imageId}`]);
     }
 
+    handleError(err: any) {
+        const errorType = err.name;
 
+        const errorHandling = {
+            [BadRequestError.name]: (err: BadRequestError) => {
+                console.log('Something bad happened with the request.', { ...err });
+            },
+            [NetworkError.name]: (err: NetworkError) => {
+                console.log('Something bad happened with the network.', { ...err });
+            }
+        }
+        
+        errorHandling[errorType](err);
+    }
 }

@@ -14,7 +14,7 @@ export class MuseumService {
     constructor(@Inject(MuseumProvider) public _museumProviders: MuseumProvider[]) {
         this.museumProviders = _museumProviders;
     }
-    getArtwork(museumId: number, id: string): Artwork {
+    getArtwork(museumId: number, id: string): Observable<Artwork> {
         return this.getMuseumProvider(museumId).getArtwork(id);
     }
 

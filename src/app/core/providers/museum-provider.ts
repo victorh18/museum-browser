@@ -9,7 +9,7 @@ export abstract class MuseumProvider {
 
     abstract getArtworks(params: SearchParams): Observable<Artwork[]>;
     abstract getMuseumInfo(museumId: number): Museum;
-    abstract getArtwork(id: string): Artwork;
+    abstract getArtwork(id: string): Observable<Artwork>;
     abstract paramsTransformer(params: SearchParams): string
 }
 

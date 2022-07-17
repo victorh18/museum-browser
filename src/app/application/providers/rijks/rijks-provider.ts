@@ -1,14 +1,16 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { forkJoin, map, mergeMap, Observable } from "rxjs";
+import { catchError, forkJoin, map, mergeMap, Observable, of, throwError } from "rxjs";
 import { Artwork } from "src/app/core/entities/artwork";
 import { Museum } from "src/app/core/entities/museum";
 import { SearchParams } from "src/app/core/entities/search-params";
+import { BadRequestError } from "src/app/core/exceptions/BadRequestError";
+import { NetworkError } from "src/app/core/exceptions/NetworkError";
 import { CustomHttpParamEncoder } from "../../utils/CustomHttpParamEncoder";
-import { ARTWORKS_ENDPOINT, AUTH_TOKEN, PARAMS_EQUIVALENCE, RIJKS_URL } from "./constants";
-import { convertParams, transformArtworkObject } from "./utils";
+import { PARAMS_EQUIVALENCE, RIJKS_URL } from "./constants";
+import { transformArtworkObject } from "./utils";
 
 @Injectable()
 export class RijksProvider {
@@ -21,7 +23,6 @@ export class RijksProvider {
             location: 'The Netherlands',
             description: 'A cool museum'
         }
-        
     }
 
     getArtworks(params: SearchParams): Observable<Artwork[]> {
@@ -31,8 +32,6 @@ export class RijksProvider {
             params: this.paramsTransformer(params)
         };
 
-        console.log(options);
-        
         const initialArtworks$ = this.httpClient.get(url, options)
             .pipe(
                 map((a: any) => this.transformArtworkObjects(a.artObjects)),
@@ -56,7 +55,8 @@ export class RijksProvider {
                     });
 
                     return forkJoin(tilesRequests$)
-                })
+                }),
+                catchError(this.handleError)
             );
         
         return initialArtworks$
@@ -67,10 +67,10 @@ export class RijksProvider {
     }
 
     getArtwork(id: string): Observable<Artwork> {
-        const url = `${RIJKS_URL}/${id}?key=yluGpPtn`;
+        const url = `${RIJKS_URL}/${id}`;
 
         return this.httpClient.get(url)
-            .pipe(map((a: any) => transformArtworkObject(a.artObject)));
+            .pipe(map((a: any) => transformArtworkObject(a.artObject)), catchError(this.handleError));
     }
 
     paramsTransformer(params: SearchParams): HttpParams {
@@ -85,8 +85,6 @@ export class RijksProvider {
                 }
             }
         }
-
-        httpParams = httpParams.set('key', 'yluGpPtn')
         
         return httpParams;
     }
@@ -101,15 +99,12 @@ export class RijksProvider {
         return artworks;
     }
 
-    // private replaceImageUrl(artwork: Artwork): Artwork {
-    //     let tilesUrl = RIJKS_URL + ARTWORK_TILES + AUTH_TOKEN;
-    //     tilesUrl = tilesUrl.replace('objectNumber', artwork.internalId);
+    private handleError(error: HttpErrorResponse) {
+        if (error.status === 401) {
+            return throwError(() => new BadRequestError('Wrong auth key used. Please, contact the page maintainer.', error.url ?? '', 401, null));
+        } 
 
-    //     this.httpClient.get(tilesUrl).subscribe((response: any) => {
-    //         const imageUrl = response?.levels.filter((l: any) => l.name === 'z4')[0].tiles.filter((t: any) => t.x === 0 && t.y === 0)[0].url;
-    //         artwork.imageUrl = imageUrl;
-
-    //     })
-    // }
+        return throwError(() => new NetworkError('Wrong auth key used. Please, contact the page maintainer.', error.url ?? '', null));
+    }
 
 }

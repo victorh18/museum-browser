@@ -14,12 +14,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from './presentation/components/navbar/navbar.component';
 import { AppFooterComponent } from './presentation/components/app-footer/app-footer.component';
 import { RijksProvider } from './application/providers/rijks/rijks-provider';
-import { MuseumProvider, MUSEUM_PROVIDERS_TOKEN } from "./core/providers/museum-provider";
+import { MuseumProvider } from "./core/providers/museum-provider";
 import { ArtworkDetailsComponent } from './presentation/views/artwork-details/artwork-details.component';
-import { RouterModule } from '@angular/router';
-import { routes } from './presentation/routing/routes';
+import { AppRoutingModule } from './presentation/routing/routes';
 import { ArtworkDetailResolver } from './application/resolvers/artwork-detail.resolver';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RijksInterceptor } from './application/providers/rijks/interceptor';
 
 @NgModule({
   declarations: [
@@ -39,12 +39,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     MatButtonModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    AppRoutingModule
   ],
   providers: [ 
     MuseumService, 
     ArtworkDetailResolver,
-    { provide: MuseumProvider, useClass: RijksProvider, multi: true } 
+    { provide: MuseumProvider, useClass: RijksProvider, multi: true } ,
+    { provide: HTTP_INTERCEPTORS, useClass: RijksInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
