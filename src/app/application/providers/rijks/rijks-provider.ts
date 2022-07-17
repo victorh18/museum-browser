@@ -2,7 +2,7 @@
 
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, forkJoin, map, mergeMap, Observable, of, throwError } from "rxjs";
+import { catchError, forkJoin, map, mergeMap, Observable, throwError } from "rxjs";
 import { Artwork } from "src/app/core/entities/artwork";
 import { Museum } from "src/app/core/entities/museum";
 import { SearchParams } from "src/app/core/entities/search-params";

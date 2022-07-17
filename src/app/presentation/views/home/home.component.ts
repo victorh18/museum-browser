@@ -17,6 +17,8 @@ import { NetworkError } from 'src/app/core/exceptions/NetworkError';
 
 export class HomeComponent extends IView implements OnInit {
     images: Image[] = [];
+    isRedirecting = false;
+
     public static override animationId = "Home";
 
     constructor(private museumService: MuseumService, private router: Router) { 
@@ -41,6 +43,7 @@ export class HomeComponent extends IView implements OnInit {
     }
 
     carouselClickCurrent(image: Image): void {
+        this.isRedirecting = true;
         this.router.navigate([`artworks/1/${image.imageId}`]);
     }
 

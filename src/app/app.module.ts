@@ -20,6 +20,7 @@ import { AppRoutingModule } from './presentation/routing/routes';
 import { ArtworkDetailResolver } from './application/resolvers/artwork-detail.resolver';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RijksInterceptor } from './application/providers/rijks/interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { RijksInterceptor } from './application/providers/rijks/interceptor';
     BrowserAnimationsModule,
     MatIconModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
     MatButtonModule,
     HttpClientModule,
     AppRoutingModule
