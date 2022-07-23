@@ -35,7 +35,14 @@ export class HomeComponent extends IView implements OnInit {
 
         this.museumService.getArtworks(1, params).subscribe({
             next: (data) => {
-                this.images = data.map((a) => ({imageId: a.internalId, imageUrl: a.imageUrl }) );
+                this.images = data.map((a) => (
+                    {
+                        imageId: a.internalId, 
+                        imageUrl: a.imageUrl,
+                        imageTitle: a.title,
+                        imageAuthor: a.author
+                    }
+                ));
             },
             error: this.handleError
         })

@@ -1,7 +1,6 @@
 <div class="carousel">
     <div class="carousel-container mat-elevation-z8">
       <carousel-button [icon]="'navigate_before'" class="carousel-button" (click)="movePrevious()"></carousel-button>
-
       <carousel-tile 
         #previousTile
         class="background-tile"
@@ -16,7 +15,7 @@
         class="current-tile"
         (click)="clickOnCurrent()"
         [@moveCurrent]="getCurrentAnimationState(movedNext, movedPrevious)"  
-        [imageUrl]="images[currentIndex]?.imageUrl ?? ''">     
+        [imageUrl]="images[currentIndex].imageUrl">     
 
       </carousel-tile>
   
@@ -28,7 +27,11 @@
         (@moveNext.start)="resetAnimation()"
         (click)="moveNext()">
       </carousel-tile>
-  
       <carousel-button [icon]="'navigate_next'" class="carousel-button" (click)="moveNext()"></carousel-button>
     </div>
   </div>
+  <div *ngIf="images.length > 0" class="current-tile-desc">
+    <i class="current-tile-desc-text">{{ images[currentIndex].imageTitle }}</i>
+    <i>{{ images[currentIndex].imageAuthor }}</i>
+  </div>
+  

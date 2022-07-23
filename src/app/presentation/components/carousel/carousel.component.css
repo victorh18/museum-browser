@@ -3,6 +3,8 @@
     height: 55%;
     display: flex;
     justify-content: center;
+    margin-bottom: 10px
+    /* flex-direction: column; */
 }
 
 .carousel-container {
@@ -32,3 +34,11 @@
     width: 3%;
     height: 100%;
 }
+
+.current-tile-desc {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    color: grey
+};
+
