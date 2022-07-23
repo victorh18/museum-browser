@@ -4,7 +4,7 @@
             <mat-icon>menu</mat-icon>
         </button>
     </div>
-    <span>Museum Browser </span>
+    <span (click)="redirectToHome()" [style.cursor]="router.url === '/home' ? '' : 'pointer' ">Museum Browser</span>
     <span class="example-spacer"></span>
     <a href="https://github.com/victorh18/museum-browser" >
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" style="margin-right: 10px">
