@@ -28,6 +28,7 @@ import { SearchModalComponent } from './presentation/components/search-modal/sea
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ChipMultiSelectComponent } from './presentation/components/chip-multiselect/chip-multiselect.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     AppFooterComponent,
     ArtworkDetailsComponent,
     TestViewComponent,
-    SearchModalComponent
+    SearchModalComponent,
+    ChipMultiSelectComponent
   ],
   imports: [
     BrowserModule,

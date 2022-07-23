@@ -10,44 +10,22 @@
            </mat-form-field>
         </div>
         <div>
-            <mat-form-field>
-             <mat-label>Materials</mat-label>
-             <mat-chip-list #materialsChipList>
-                <mat-chip 
-                    *ngFor="let material of materials"
-                    [color]="'primary'"
-                    (removed)="removed(material)"
-                >
-                    {{ material }}
-                    <button matChipRemove>
-                        <mat-icon>cancel</mat-icon>
-                    </button>
-                </mat-chip>
-                <input 
-                    placeholder="Material"
-                    #materialsInput
-                    [formControl]="materialsControl"
-                    [matAutocomplete]="materialAutocomplete"
-                    [matChipInputFor]="materialsChipList"
-                    [matChipInputSeparatorKeyCodes]="separatorsKeys"
-                    (matChipInputTokenEnd)="addMaterial($event)"
-                >
-             </mat-chip-list>
-             <mat-autocomplete
-                #materialAutocomplete="matAutocomplete"
-                (optionSelected)="materialSelected($event)"
+            <chip-multiselect
+                [placeholder]="'Materials'"
+                [label]="'Material'"
+                [allValues]="allMaterials"
+                [(values)]="materials"
             >
-                <mat-option *ngFor="let material of filteredMaterials | async" [value]="material">
-                    {{ material }}
-                </mat-option> 
-            </mat-autocomplete>
-            </mat-form-field>
+            </chip-multiselect>
         </div>
         <div>
-            <mat-form-field>
-             <mat-label>Techniques</mat-label>
-             <input matInput type="text" [(ngModel)]="techniques">
-            </mat-form-field>
+            <chip-multiselect
+                [placeholder]="'Techniques'"
+                [label]="'Technique'"
+                [allValues]="allTechniques"
+                [(values)]="techniques"
+            >
+            </chip-multiselect>
         </div>
         <div>
             <mat-form-field>
@@ -62,5 +40,5 @@
             </mat-form-field>
          </div>
     </div>
-    <button mat-flat-button color="primary">Search</button>
+    <button mat-flat-button color="primary" (click)="try()">Search</button>
 </div>

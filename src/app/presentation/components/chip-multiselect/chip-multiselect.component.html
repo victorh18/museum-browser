@@ -1,0 +1,32 @@
+<div>
+        <mat-form-field style="width: 100%">
+            <mat-label>{{ label }}</mat-label>
+            <mat-chip-list #controlChipList>
+                <mat-chip 
+                    *ngFor="let value of values" 
+                    [color]="'primary'" 
+                    (removed)="removed(value)"
+                >
+                    {{ value }}
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                <input 
+                    #multiselectInput
+                    [placeholder]="placeholder"  
+                    [formControl]="multiselectControl"
+                    [matAutocomplete]="controlAutocomplete" 
+                    [matChipInputFor]="controlChipList"
+                    [matChipInputSeparatorKeyCodes]="separatorsKeys" 
+                    (matChipInputTokenEnd)="addValueFromSelection($event)">
+            </mat-chip-list>
+            <mat-autocomplete 
+                #controlAutocomplete="matAutocomplete" 
+                (optionSelected)="valueSelected($event)">
+                <mat-option *ngFor="let value of filteredValues | async" [value]="value">
+                    {{ value }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+</div>

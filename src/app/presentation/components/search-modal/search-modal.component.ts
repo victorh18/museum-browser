@@ -65,4 +65,9 @@ export class SearchModalComponent {
     filterMaterials(text: string) {
         return this.allMaterials.filter(material => material.toLowerCase().includes(text.toLowerCase()));
     }
+
+    try() {
+        console.log("values", { techniques: this.techniques });
+        
+    }
 }
