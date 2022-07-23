@@ -6,6 +6,13 @@
     </div>
     <span (click)="redirectToHome()" [style.cursor]="router.url === '/home' ? '' : 'pointer' ">Museum Browser</span>
     <span class="example-spacer"></span>
+    
+    <div class="menu-icon">
+        <button mat-icon-button aria-label="Example icon-button with menu icon">
+            <mat-icon class="color: white">search</mat-icon>
+        </button>
+    </div>
+    <span style="flex: 0.05 0.1 auto;"></span>
     <a href="https://github.com/victorh18/museum-browser" >
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" style="margin-right: 10px">
             <mat-icon svgIcon="github"></mat-icon>
