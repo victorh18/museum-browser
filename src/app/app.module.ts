@@ -21,6 +21,13 @@ import { ArtworkDetailResolver } from './application/resolvers/artwork-detail.re
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RijksInterceptor } from './application/providers/rijks/interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TestViewComponent } from './presentation/views/test-view/test-view.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { SearchModalComponent } from './presentation/components/search-modal/search-modal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -31,7 +38,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HomeComponent,
     NavbarComponent,
     AppFooterComponent,
-    ArtworkDetailsComponent
+    ArtworkDetailsComponent,
+    TestViewComponent,
+    SearchModalComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +50,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule,
     MatButtonModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatChipsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule
   ],
   providers: [ 
     MuseumService, 

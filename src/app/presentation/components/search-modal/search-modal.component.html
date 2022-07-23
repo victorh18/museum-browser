@@ -1,0 +1,66 @@
+<div class="search-modal-container">
+    <div>
+        <h2>Search artworks...</h2>
+    </div>
+    <div class="search-modal-controls">
+        <div style="width: 100%">
+           <mat-form-field>
+            <mat-label>Author</mat-label>
+            <input matInput type="text" [(ngModel)]="author">
+           </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+             <mat-label>Materials</mat-label>
+             <mat-chip-list #materialsChipList>
+                <mat-chip 
+                    *ngFor="let material of materials"
+                    [color]="'primary'"
+                    (removed)="removed(material)"
+                >
+                    {{ material }}
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                <input 
+                    placeholder="Material"
+                    #materialsInput
+                    [formControl]="materialsControl"
+                    [matAutocomplete]="materialAutocomplete"
+                    [matChipInputFor]="materialsChipList"
+                    [matChipInputSeparatorKeyCodes]="separatorsKeys"
+                    (matChipInputTokenEnd)="addMaterial($event)"
+                >
+             </mat-chip-list>
+             <mat-autocomplete
+                #materialAutocomplete="matAutocomplete"
+                (optionSelected)="materialSelected($event)"
+            >
+                <mat-option *ngFor="let material of filteredMaterials | async" [value]="material">
+                    {{ material }}
+                </mat-option> 
+            </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+             <mat-label>Techniques</mat-label>
+             <input matInput type="text" [(ngModel)]="techniques">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+             <mat-label>Artwork century</mat-label>
+             <input matInput type="text" [(ngModel)]="artworkCentury">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+             <mat-label>Description</mat-label>
+             <textarea matInput type="text" [(ngModel)]="description"></textarea>
+            </mat-form-field>
+         </div>
+    </div>
+    <button mat-flat-button color="primary">Search</button>
+</div>
