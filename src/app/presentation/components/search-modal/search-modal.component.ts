@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { map, Observable, of, startWith } from 'rxjs';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'search-modal',
@@ -30,7 +31,7 @@ export class SearchModalComponent {
 
     separatorsKeys = [ENTER, COMMA];
 
-    constructor() {
+    constructor(private dialogRef: MatDialogRef<SearchModalComponent>) {
         this.filteredMaterials = this.materialsControl.valueChanges.pipe(
             startWith(null),
             map((material: string | null) => (material ? this.filterMaterials(material) : this.allMaterials.slice()))
@@ -74,6 +75,7 @@ export class SearchModalComponent {
             artworkCentury: this.artworkCentury,
             description: this.description
         }
+        this.dialogRef.close('Done!');
         console.log(values);
         
     }

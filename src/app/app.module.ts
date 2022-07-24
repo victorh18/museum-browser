@@ -29,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChipMultiSelectComponent } from './presentation/components/chip-multiselect/chip-multiselect.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ChipMultiSelectComponent } from './presentation/components/chip-multise
     ArtworkDetailsComponent,
     TestViewComponent,
     SearchModalComponent,
-    ChipMultiSelectComponent
+    ChipMultiSelectComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -59,11 +61,13 @@ import { ChipMultiSelectComponent } from './presentation/components/chip-multise
     MatChipsModule,
     FormsModule,
     ReactiveFormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDialogModule
   ],
   providers: [ 
     MuseumService, 
     ArtworkDetailResolver,
+    {provide: MatDialogRef, useValue: {}},
     { provide: MuseumProvider, useClass: RijksProvider, multi: true } ,
     { provide: HTTP_INTERCEPTORS, useClass: RijksInterceptor, multi: true }
   ],

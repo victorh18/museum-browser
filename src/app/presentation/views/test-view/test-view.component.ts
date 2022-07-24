@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SearchModalComponent } from '../../components/search-modal/search-modal.component';
 
 @Component({
     selector: 'test-view',
@@ -6,8 +8,18 @@ import { Component } from '@angular/core';
 })
 
 export class TestViewComponent {
-    constructor() { 
+    constructor(private dialog: MatDialog) { 
         console.log('TestView');
         
+    }
+
+    openDialog(): void {
+        const dialogOptions: MatDialogConfig = {
+            width: '35%',
+            data: {} ,
+            enterAnimationDuration: '200ms'    
+        };
+
+        this.dialog.open(SearchModalComponent, dialogOptions);
     }
 }
