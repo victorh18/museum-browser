@@ -67,7 +67,14 @@ export class SearchModalComponent {
     }
 
     try() {
-        console.log("values", { techniques: this.techniques });
+        const values = {
+            author: this.author,
+            materials: this.materials,
+            techniques: this.techniques,
+            artworkCentury: this.artworkCentury,
+            description: this.description
+        }
+        console.log(values);
         
     }
 }

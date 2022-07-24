@@ -52,7 +52,10 @@ export class ChipMultiSelectComponent{
     }
 
     filterValues(value: string | null) {
-        return value ? this.allValues.filter(value => value.includes(value || '')) : this.allValues.slice();
+        const returnValues = this.allValues.filter(v => v.includes(value || ''));
+        console.log('filtered values', value, returnValues);
+        
+        return returnValues;
     }
 
     addValue(value: string) {
