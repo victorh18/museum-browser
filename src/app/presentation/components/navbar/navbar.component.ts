@@ -22,9 +22,7 @@ export class NavbarComponent {
     iconRegistry.addSvgIconLiteral('github', sanitizer.bypassSecurityTrustHtml(GITHUB_ICON))
  }
 
- redirectToHome() {
-    console.log('Current route', this.router.url);
-    
+ redirectToHome(): void {
     this.router.navigate(['/home']);
  }
 

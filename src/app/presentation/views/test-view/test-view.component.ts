@@ -9,7 +9,7 @@ import { SearchModalComponent } from '../../components/search-modal/search-modal
 
 export class TestViewComponent {
     constructor(private dialog: MatDialog) { 
-        console.log('TestView');
+
         
     }
 

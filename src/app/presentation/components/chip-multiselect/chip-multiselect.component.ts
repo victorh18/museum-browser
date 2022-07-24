@@ -28,7 +28,7 @@ export class ChipMultiSelectComponent{
     constructor() {
         this.filteredValues = this.multiselectControl.valueChanges.pipe(
             startWith(null),
-            map((v: string | null) => this.filterValues(v))
+            map((v: string | null) => (v ? this.filterValues(v) : this.allValues.slice()))
         )
     }
 
@@ -41,7 +41,8 @@ export class ChipMultiSelectComponent{
     valueSelected(event: MatAutocompleteSelectedEvent) {
         const value = event.option.value;
         this.addValue(value)
-        this.multiselectInput.nativeElement.value = '';       
+        this.multiselectInput.nativeElement.value = '';  
+        this.multiselectControl.setValue(null);     
     }
 
     removed(value: string) {
@@ -51,16 +52,17 @@ export class ChipMultiSelectComponent{
         this.valuesChange.emit(this.values);
     }
 
-    filterValues(value: string | null) {
-        const returnValues = this.allValues.filter(v => v.includes(value || ''));
-        console.log('filtered values', value, returnValues);
+    filterValues(value: string) {
+        console.log('the value', value);
         
-        return returnValues;
+        return this.allValues.filter(v => v.includes(value));
     }
 
     addValue(value: string) {
         if (value && !this.values.includes(value))  
             this.values.push(value);
+
+        
 
         this.valuesChange.emit(this.values); 
     }
