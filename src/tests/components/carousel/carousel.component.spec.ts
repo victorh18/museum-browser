@@ -32,7 +32,7 @@ describe('Carousel component...', () => {
     })
 
     it('...should move to the next artwork.', () => {
-        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId}));
+        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId, imageTitle: a.title, imageAuthor: a.author}));
         const initialIndex = component.currentIndex;
         
         component.moveNext();
@@ -40,7 +40,7 @@ describe('Carousel component...', () => {
         expect(component.currentIndex).toBe(initialIndex + 1);
     } );
     it('...should move to the previous artwork.', () => {
-        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId}));
+        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId, imageTitle: a.title, imageAuthor: a.author}));
         const initialIndex = component.currentIndex;
 
         component.movePrevious();
@@ -48,7 +48,7 @@ describe('Carousel component...', () => {
         expect(component.currentIndex).toBe(initialIndex - 1);
     });
     it('...should show the first image after all images have been shown.', () => {
-        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId}));
+        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId, imageTitle: a.title, imageAuthor: a.author}));
         component.currentIndex = component.images.length - 1;
         
         component.moveNext();
@@ -56,7 +56,7 @@ describe('Carousel component...', () => {
         expect(component.currentIndex).toBe(0);
     });
     it('...should show the last image after all images have been receded.', () => {
-        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId}));
+        component.images = Artworks.map(a => ({imageUrl: a.imageUrl, imageId: a.internalId, imageTitle: a.title, imageAuthor: a.author}));
         component.currentIndex = 0;
         const lastImageIndex = Artworks.length - 1;
 

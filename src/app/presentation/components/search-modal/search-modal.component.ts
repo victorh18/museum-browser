@@ -77,11 +77,6 @@ export class SearchModalComponent {
             description: this.description
         }
 
-        // const values: SearchParams = {
-        //     author: this.author,
-        //     searchText: this.description,
-        //     m
-        // }
         this.dialogRef.close('Done!');
         console.log(values);
         
