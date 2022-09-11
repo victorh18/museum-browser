@@ -6,6 +6,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { map, Observable, of, startWith } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
+import { SearchParams } from 'src/app/core/entities/search-params';
 
 @Component({
     selector: 'search-modal',
@@ -75,6 +76,12 @@ export class SearchModalComponent {
             artworkCentury: this.artworkCentury,
             description: this.description
         }
+
+        // const values: SearchParams = {
+        //     author: this.author,
+        //     searchText: this.description,
+        //     m
+        // }
         this.dialogRef.close('Done!');
         console.log(values);
         

@@ -82,7 +82,15 @@ export class RijksProvider extends MuseumProvider {
             if (Object.prototype.hasOwnProperty.call(params, key)) {
                 if (params[key as keyof SearchParams]) {
                     const parameterNameKey = key as keyof SearchParams;
-                    httpParams = httpParams.set(PARAMS_EQUIVALENCE[parameterNameKey], params[parameterNameKey]);
+                    let value: string;
+
+                    if (params[parameterNameKey] instanceof Array) {
+                        value = (params[parameterNameKey] as string[]).join('+');
+                    } else {
+                        value = params[parameterNameKey] as string;
+                    }
+                    
+                    httpParams = httpParams.set(PARAMS_EQUIVALENCE[parameterNameKey], value);
 
                 }
             }

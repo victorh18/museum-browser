@@ -6,9 +6,18 @@ export const ARTWORK_ENDPOINT = '/{objectNumber}';
 export const ARTWORK_TILES = '/{objectNumber}/tiles'
 export const AUTH_TOKEN = '&key=yluGpPtn';
 
-export const PARAMS_EQUIVALENCE: SearchParams = {
+export interface ParamEquivalence {
+    author: string,
+    searchText: string,
+    materials: string,
+    techniques: string,
+    additionalInfo: string
+}
+
+export const PARAMS_EQUIVALENCE: ParamEquivalence = {
     author: 'involvedMaker',
     searchText: 'q',
-    medium: 'material',
+    materials: 'material',
+    techniques: 'technique',
     additionalInfo: ''
 }

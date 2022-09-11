@@ -29,7 +29,8 @@ export class HomeComponent extends IView implements OnInit {
         const params: SearchParams = {
             author: 'Rembrandt+van+Rijn',
             searchText: '',
-            medium: '',
+            materials: [],
+            techniques: [],
             additionalInfo: ''
         };
 

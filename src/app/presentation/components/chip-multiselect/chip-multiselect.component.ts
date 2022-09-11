@@ -53,16 +53,12 @@ export class ChipMultiSelectComponent{
     }
 
     filterValues(value: string) {
-        console.log('the value', value);
-        
         return this.allValues.filter(v => v.includes(value));
     }
 
     addValue(value: string) {
         if (value && !this.values.includes(value))  
             this.values.push(value);
-
-        
 
         this.valuesChange.emit(this.values); 
     }
