@@ -68,7 +68,7 @@ export class SearchModalComponent {
         return this.allMaterials.filter(material => material.toLowerCase().includes(text.toLowerCase()));
     }
 
-    try() {
+    getParameters() {
         const values = {
             author: this.author,
             materials: this.materials,
@@ -76,9 +76,9 @@ export class SearchModalComponent {
             artworkCentury: this.artworkCentury,
             description: this.description
         }
-
-        this.dialogRef.close('Done!');
         console.log(values);
+
+        return values;
         
     }
 }
