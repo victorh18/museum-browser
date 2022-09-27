@@ -48,19 +48,19 @@ export class ChipMultiSelectComponent{
     removed(value: string) {
         const indexToDelete = this.values.indexOf(value);
         this.values.splice(indexToDelete, 1);
-
         this.valuesChange.emit(this.values);
     }
 
     filterValues(value: string) {
         return this.allValues.filter(v => v.includes(value));
+        
     }
 
     addValue(value: string) {
         if (value && !this.values.includes(value))  
             this.values.push(value);
 
-        this.valuesChange.emit(this.values); 
+        this.valuesChange.emit(this.values);  
     }
 
 }
