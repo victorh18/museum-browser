@@ -1,4 +1,34 @@
 <div>
-    <button (click)="openDialog()">lol</button>
-    <search-modal></search-modal>
+    <button (click)="setHeightValue()">lol</button>
+
+    <div style="padding: 3%; " #thumbnailContainer>
+        <div class="artwork-thumbnail-container">
+            <artwork-thumbnail [imageUrl]="'https://i.pinimg.com/736x/1b/f0/25/1bf025013b5cdf4c86991698130144c7.jpg'"
+                class="artwork-thumbnail"></artwork-thumbnail>
+        </div>
+        <div class="artwork-thumbnail-container">
+            <artwork-thumbnail
+                [imageUrl]="'https://helios-i.mashable.com/imagery/articles/05Dr8ZiAxpm6Vtl91f11Ldl/hero-image.fill.size_1200x1200.v1611610202.jpg'"
+                class="artwork-thumbnail"></artwork-thumbnail>
+        </div>
+        <div class="artwork-thumbnail-container">
+            <artwork-thumbnail
+                [imageUrl]="'https://myfirstshiba.com/wp-content/uploads/2018/10/AdobeStock_41495025_reduced.jpg'"
+                class="artwork-thumbnail"></artwork-thumbnail>   
+        </div>
+        <div class="artwork-thumbnail-container">
+            <artwork-thumbnail
+                [imageUrl]="'https://helios-i.mashable.com/imagery/articles/05Dr8ZiAxpm6Vtl91f11Ldl/hero-image.fill.size_1200x1200.v1611610202.jpg'"
+                class="artwork-thumbnail"></artwork-thumbnail> 
+        </div>
+        <div class="artwork-thumbnail-container">
+            <artwork-thumbnail [imageUrl]="'https://i.pinimg.com/736x/1b/f0/25/1bf025013b5cdf4c86991698130144c7.jpg'"
+                class="artwork-thumbnail"></artwork-thumbnail> 
+        </div>
+        <div class="artwork-thumbnail-container">
+            <artwork-thumbnail
+                [imageUrl]="'https://myfirstshiba.com/wp-content/uploads/2018/10/AdobeStock_41495025_reduced.jpg'"
+                class="artwork-thumbnail"></artwork-thumbnail> 
+        </div>
+    </div>
 </div>

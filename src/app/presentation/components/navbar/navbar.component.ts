@@ -32,7 +32,7 @@ export class NavbarComponent {
         enterAnimationDuration: '200ms',
         minWidth: '400px'
     }
-
+    
     this.dialog.open(SearchModalComponent, dialogOptions);
 
  }

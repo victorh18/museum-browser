@@ -1,0 +1,10 @@
+.artwork-thumbnail {
+    height: 30%; 
+    width: 50%;
+}
+
+.artwork-thumbnail-container {
+    position: absolute;
+    /* left: 900px; */
+    width: 30%; 
+}

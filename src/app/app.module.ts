@@ -30,6 +30,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChipMultiSelectComponent } from './presentation/components/chip-multiselect/chip-multiselect.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ArtworkThumbnail } from './presentation/components/artwork-thumbnail/artwork-thumbnail.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
     TestViewComponent,
     SearchModalComponent,
     ChipMultiSelectComponent,
-    
+    ArtworkThumbnail
   ],
   imports: [
     BrowserModule,
