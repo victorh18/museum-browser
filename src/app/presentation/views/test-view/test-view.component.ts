@@ -1,4 +1,3 @@
-import { style } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { SearchModalComponent } from '../../components/search-modal/search-modal.component';
@@ -12,16 +11,22 @@ import { SearchModalComponent } from '../../components/search-modal/search-modal
 })
 
 export class TestViewComponent implements OnInit {
-    @ViewChild('thumbnailContainer') thumbnailContainer: ElementRef<any>;
+    @ViewChild('thumbnailContainer') thumbnailContainer: ElementRef;
 
     constructor(private dialog: MatDialog) { 
 
         
     }
     ngOnInit(): void {
+        //this.setHeightValue();
         window.onresize = () => {
             this.setHeightValue();
         }
+        window.onload = () => {
+            this.setHeightValue();
+
+        }
+      
     }
 
     openDialog(): void {
@@ -40,21 +45,22 @@ export class TestViewComponent implements OnInit {
         const columnCount = windowWidth > 550 ? 3 : 2;
         const columnClearance = columnCount * 10
 
-        const logValues = {
-            thumbnailHeight: this.thumbnailContainer.nativeElement.children[1].offsetHeight,
-            windowWidth,
-            childrenLength: this.thumbnailContainer.nativeElement.children.length
-        }
+        // const logValues = {
+        //     thumbnailHeight: this.thumbnailContainer.nativeElement.children[1].offsetHeight,
+        //     windowWidth,
+        //     childrenLength: this.thumbnailContainer.nativeElement.children.length
+        // }
 
-        console.table(logValues);
+        //console.table(logValues);
 
         const colWidth = (windowWidth - columnClearance) / columnCount;
         
         const positionArray = [...new Array(columnCount)].map(() => { return 20 });
 
         for (let index = 0; index < childrenLength; index++) {
-            const element = this.thumbnailContainer.nativeElement.children[index];
-            
+            const element = this.thumbnailContainer.nativeElement.children[index].children[0];
+            //console.log("affected element: ", element);
+
             const colPosition = index % columnCount;
 
             element.style.left = `${colWidth * colPosition}px`
