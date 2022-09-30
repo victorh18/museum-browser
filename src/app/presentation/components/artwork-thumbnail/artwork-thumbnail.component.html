@@ -1,5 +1,7 @@
-<div class="container mat-elevation-z2" >
-    <img [src]="imageUrl" alt="Happy Shiba">
-    <p class="title">Artwork Title</p>
-    <p class="author">Artwork Author</p>
+<div #thumbnailContainer class="container mat-elevation-z2" >
+    <div style="margin-bottom: 10px; overflow: hidden">
+        <img class="hi" [src]="artwork.imageUrl" alt="Happy Shiba">
+    </div>
+    <p class="title">{{ artwork.title }}</p>
+    <p class="author">{{ artwork.author}} (c. {{ artwork.elaborationDate.getFullYear() }})</p>
 </div>
