@@ -1,6 +1,6 @@
 .container {
     background-color: white;
-    border-radius: 3px;
+    border-radius: 5px;
     overflow: hidden;
     position: absolute;
     cursor: pointer;
@@ -25,7 +25,6 @@
 .container  p {
     margin-top: 0px;
     margin-bottom: 4px;
-    margin-left: 4px;
 
 }
 
@@ -41,4 +40,14 @@
     font-weight: lighter;
     text-align: left;
 
+}
+
+.detail-container {
+    padding-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.label-container {
+    margin-top: 8px;
 }

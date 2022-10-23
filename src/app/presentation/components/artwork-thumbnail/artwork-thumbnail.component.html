@@ -2,6 +2,11 @@
     <div style="margin-bottom: 10px; overflow: hidden">
         <img id="artworkThumbnailImage" class="hi" [src]="artwork.imageUrl" alt="Happy Shiba">
     </div>
-    <p id="artworkThumbnailTitle" class="title">{{ artwork.title }}</p>
-    <p id="artworkThumbnailAuthor" class="author">{{ artwork.author}} (c. {{ artwork.elaborationDate.getFullYear() }})</p>
+    <div class="detail-container">
+        <p id="artworkThumbnailTitle" class="title">{{ artwork.title }}</p>
+        <p id="artworkThumbnailAuthor" class="author">{{ artwork.author}} (c. {{ artwork.elaborationDate.getFullYear() }})</p>
+        <div class="label-container" *ngIf="artwork.techniques">
+            <technique-label *ngFor="let technique of artwork.techniques" [label]="technique"></technique-label>
+        </div>
+    </div>
 </div>

@@ -25,7 +25,7 @@ export class TestViewComponent implements OnInit {
             imageUrl: 'https://lh3.ggpht.com/96neJi_Hm4RqBwlFpYlnRUnVm1Qmp6cE25QH4ouQ-a3-Mxm1Pot27J8oTkDijoeg9c1DX6rZYSF2u0nVkzZarhZ1s4dC=s0',
             author: 'Guess some Italian gui',
             materials: ['Paint'],
-            techniques: [ 'chromatic' ],
+            techniques: [ 'chromatic', 'sepia' ],
             originLocation: 'a county'
         },
         {
@@ -83,26 +83,34 @@ export class TestViewComponent implements OnInit {
     }
 
     setHeightValue(): void {
-        const windowWidth = window.innerWidth;
-        const childrenLength = this.thumbnailListContainer.nativeElement.children.length;
-        const columnCount = windowWidth > 550 ? 3 : 2;
-        const columnClearance = columnCount * 10
+        const leftOffset = 400;
+        const topOffset = 20;
+        const thumbnailMinWidth = 300;
 
-        const colWidth = (windowWidth - columnClearance) / columnCount;
+        const leftOffsetPercentage = (leftOffset / window.innerWidth) * 100;
+
+        const windowWidth = window.innerWidth - leftOffset;
+        const childrenCount = this.thumbnailListContainer.nativeElement.children.length;
+
+        const columnCount = Math.floor(windowWidth / thumbnailMinWidth);
+
+        const colWidth = (windowWidth) / columnCount;
+
+        console.log("offset percentage", leftOffsetPercentage);
         
-        const positionArray = [...new Array(columnCount)].map(() => { return 20 });
+        const positionArray = [...new Array(columnCount)].map(() => { return topOffset });
 
-        for (let index = 0; index < childrenLength; index++) {
+        for (let index = 0; index < childrenCount; index++) {
             const element = this.thumbnailListContainer.nativeElement.children[index].children[0];
-            //console.log("affected element: ", element);
 
             const colPosition = index % columnCount;
 
-            element.style.left = `${colWidth * colPosition}px`
-            element.style.width = `${90 / columnCount}%`
-            element.style.top = `${positionArray[colPosition] + 20}px`;
+            element.style.left = `${leftOffset + colWidth * colPosition}px`
+            element.style.width = `${(95 - leftOffsetPercentage) / columnCount}%`
+            //element.style.width = `${280}px`
+            element.style.top = `${positionArray[colPosition] + topOffset}px`;
 
-            positionArray[colPosition] += element.offsetHeight + 20;
+            positionArray[colPosition] += element.offsetHeight + topOffset;
             
         }
         

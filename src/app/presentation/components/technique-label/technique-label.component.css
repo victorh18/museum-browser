@@ -1,0 +1,18 @@
+.container {
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0px;
+    margin-right: 5px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #7c4b3a;
+    color: white
+}
+
+.container p {
+    margin: 0px;
+    font-size: small;
+}

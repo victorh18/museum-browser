@@ -31,6 +31,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChipMultiSelectComponent } from './presentation/components/chip-multiselect/chip-multiselect.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ArtworkThumbnail } from './presentation/components/artwork-thumbnail/artwork-thumbnail.component';
+import { TechniqueLabelComponent } from './presentation/components/technique-label/technique-label.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { ArtworkThumbnail } from './presentation/components/artwork-thumbnail/ar
     TestViewComponent,
     SearchModalComponent,
     ChipMultiSelectComponent,
-    ArtworkThumbnail
+    ArtworkThumbnail,
+    TechniqueLabelComponent,
+    TechniqueLabelComponent
   ],
   imports: [
     BrowserModule,
