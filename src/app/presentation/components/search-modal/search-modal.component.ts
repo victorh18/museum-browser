@@ -7,6 +7,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { map, Observable, of, startWith } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SearchParams } from 'src/app/core/entities/search-params';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'search-modal',
@@ -32,7 +33,7 @@ export class SearchModalComponent {
 
     separatorsKeys = [ENTER, COMMA];
 
-    constructor(private dialogRef: MatDialogRef<SearchModalComponent>) {
+    constructor(private dialogRef: MatDialogRef<SearchModalComponent>, private router: Router) {
         this.filteredMaterials = this.materialsControl.valueChanges.pipe(
             startWith(null),
             map((material: string | null) => (material ? this.filterMaterials(material) : this.allMaterials.slice()))
@@ -74,11 +75,11 @@ export class SearchModalComponent {
             materials: this.materials,
             techniques: this.techniques,
             artworkCentury: this.artworkCentury,
-            description: this.description
+            searchText: this.description
         }
-        console.log(values);
 
-        return values;
-        
+        this.dialogRef.close()
+        this.router.navigateByUrl('/test', {state: { searchParams: values }})
+
     }
 }

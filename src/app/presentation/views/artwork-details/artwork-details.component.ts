@@ -22,7 +22,7 @@ export class ArtworkDetailsComponent extends IView implements OnInit {
 
 
     ngOnInit() {
-        this.activatedRoute.data.forEach(data => {
+        this.activatedRoute.data.subscribe(data => {
             this.artwork = data['artwork'];
         })
     }

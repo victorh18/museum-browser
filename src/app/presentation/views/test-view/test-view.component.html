@@ -2,22 +2,10 @@
     <button (click)="setHeightValue()">lol</button>
 
     <div style="padding: 3%; " #thumbnailListContainer>
-        <artwork-thumbnail [artwork]="testData[0]"
-            class="artwork-thumbnail"></artwork-thumbnail>
-        <artwork-thumbnail
-            [artwork]="testData[1]"
-            class="artwork-thumbnail"></artwork-thumbnail> 
-        <artwork-thumbnail
-            [artwork]="testData[2]"
-            class="artwork-thumbnail"></artwork-thumbnail> 
-        <artwork-thumbnail
-            [artwork]="testData[1]"
-            class="artwork-thumbnail"></artwork-thumbnail> 
-        <artwork-thumbnail
-            [artwork]="testData[2]"
-            class="artwork-thumbnail"></artwork-thumbnail> 
         <artwork-thumbnail 
-            [artwork]="testData[0]"
-            class="artwork-thumbnail"></artwork-thumbnail>
+            *ngFor="let artwork of testData"
+            [artwork]="artwork"
+            class="artwork-thumbnail">
+        </artwork-thumbnail>
     </div> 
 </div>

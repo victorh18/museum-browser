@@ -32,6 +32,7 @@ import { ChipMultiSelectComponent } from './presentation/components/chip-multise
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ArtworkThumbnail } from './presentation/components/artwork-thumbnail/artwork-thumbnail.component';
 import { TechniqueLabelComponent } from './presentation/components/technique-label/technique-label.component';
+import { ArtworkSearchResultResolver } from './application/resolvers/artwork-search-result.resolver';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { TechniqueLabelComponent } from './presentation/components/technique-lab
   providers: [ 
     MuseumService, 
     ArtworkDetailResolver,
+    ArtworkSearchResultResolver,
     {provide: MatDialogRef, useValue: {}},
     { provide: MuseumProvider, useClass: RijksProvider, multi: true } ,
     { provide: HTTP_INTERCEPTORS, useClass: RijksInterceptor, multi: true }

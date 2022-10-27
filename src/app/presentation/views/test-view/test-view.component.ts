@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { Artwork } from 'src/app/core/entities/artwork';
 import { SearchModalComponent } from '../../components/search-modal/search-modal.component';
 
@@ -11,7 +12,7 @@ import { SearchModalComponent } from '../../components/search-modal/search-modal
     ]
 })
 
-export class TestViewComponent implements OnInit {
+export class TestViewComponent implements OnInit, AfterViewChecked {
     @ViewChild('thumbnailListContainer') thumbnailListContainer: ElementRef;
 
     testData: Artwork[] = [
@@ -56,12 +57,13 @@ export class TestViewComponent implements OnInit {
         }
     ]
 
-    constructor(private dialog: MatDialog) { 
+    constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute) { 
 
         
     }
-    ngOnInit(): void {
-        //this.setHeightValue();
+    ngAfterViewChecked(): void {
+        this.setHeightValue();
+
         window.onresize = () => {
             this.setHeightValue();
         }
@@ -69,7 +71,11 @@ export class TestViewComponent implements OnInit {
             this.setHeightValue();
 
         }
-      
+    }
+    ngOnInit(): void {
+         this.activatedRoute.data.subscribe( data => { 
+            this.testData = <Artwork[]>data['artworks']
+        });
     }
 
     openDialog(): void {
@@ -95,8 +101,6 @@ export class TestViewComponent implements OnInit {
         const columnCount = Math.floor(windowWidth / thumbnailMinWidth);
 
         const colWidth = (windowWidth) / columnCount;
-
-        console.log("offset percentage", leftOffsetPercentage);
         
         const positionArray = [...new Array(columnCount)].map(() => { return topOffset });
 
@@ -107,7 +111,6 @@ export class TestViewComponent implements OnInit {
 
             element.style.left = `${leftOffset + colWidth * colPosition}px`
             element.style.width = `${(95 - leftOffsetPercentage) / columnCount}%`
-            //element.style.width = `${280}px`
             element.style.top = `${positionArray[colPosition] + topOffset}px`;
 
             positionArray[colPosition] += element.offsetHeight + topOffset;
