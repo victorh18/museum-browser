@@ -5,8 +5,9 @@
     <div class="detail-container">
         <p id="artworkThumbnailTitle" class="title">{{ artwork.title }}</p>
         <p id="artworkThumbnailAuthor" class="author">{{ artwork.author}} (c. {{ artwork.elaborationDate.getFullYear() }})</p>
-        <div class="label-container" *ngIf="artwork.techniques">
+        <div class="label-container" *ngIf="artwork.techniques || artwork.materials">
             <technique-label *ngFor="let technique of artwork.techniques" [label]="technique"></technique-label>
+            <technique-label *ngFor="let material of artwork.materials" [label]="material"></technique-label>
         </div>
     </div>
 </div>
